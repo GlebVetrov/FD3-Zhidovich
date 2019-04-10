@@ -46,6 +46,8 @@ var FilterBlock = React.createClass({
 
     clearField: function() {
         this.setState({text: ''});
+        this.setState({checkbox: false,});
+        this.notSortWords();
         return;
     },
 
