@@ -146,7 +146,7 @@ var InShop2Block = React.createClass({
         React.DOM.div ({className: 'InShop2Block_product_url'}, productData.url),
         React.DOM.div ({className: 'InShop2Block_product_quantity'}, productData.quantity),
         React.DOM.div ({className: 'InShop2Block_product_button'}, 
-          React.DOM.input ({type: 'button', value: 'Удалить',  onClick: this.delete})
+          React.DOM.input ({type: 'button', value: 'Delete',  onClick: this.delete})
         )
         );
     },
@@ -192,7 +192,7 @@ var InShop2Block = React.createClass({
         React.DOM.div ({className: 'InShop2Block_product_url'}, productData.url),
         React.DOM.div ({className: 'InShop2Block_product_quantity'}, productData.quantity),
         React.DOM.div ({className: 'InShop2Block_product_button'}, 
-          React.DOM.input ({type: 'button', value: 'Удалить',  onClick: this.delete})
+          React.DOM.input ({type: 'button', value: 'Delete',  onClick: this.delete})
         )
         );
     },
@@ -238,7 +238,7 @@ var InShop2Block = React.createClass({
         React.DOM.div ({className: 'InShop2Block_product_url'}, productData.url),
         React.DOM.div ({className: 'InShop2Block_product_quantity'}, productData.quantity),
         React.DOM.div ({className: 'InShop2Block_product_button'}, 
-          React.DOM.input ({type: 'button', value: 'Удалить',  onClick: this.delete})
+          React.DOM.input ({type: 'button', value: 'Delete',  onClick: this.delete})
         )
         );
     },
@@ -283,7 +283,7 @@ var InShop2Block = React.createClass({
         React.DOM.div ({className: 'InShop2Block_product_url'}, productData.url),
         React.DOM.div ({className: 'InShop2Block_product_quantity'}, productData.quantity),
         React.DOM.div ({className: 'InShop2Block_product_button'}, 
-          React.DOM.input ({type: 'button', value: 'Удалить',  onClick: this.delete})
+          React.DOM.input ({type: 'button', value: 'Delete',  onClick: this.delete})
         )
         );
     },
@@ -329,7 +329,7 @@ var InShop2Block = React.createClass({
         React.DOM.div ({className: 'InShop2Block_product_url'}, productData.url),
         React.DOM.div ({className: 'InShop2Block_product_quantity'}, productData.quantity),
         React.DOM.div ({className: 'InShop2Block_product_button'}, 
-          React.DOM.input ({type: 'button', value: 'Удалить',  onClick: this.delete})
+          React.DOM.input ({type: 'button', value: 'Delete',  onClick: this.delete})
         )
         );
     },
