@@ -5,11 +5,11 @@ var InShop2Block = React.createClass({
     getInitialState: function () {
       return {
         product: [
-          {text: product1, code: 1, delete: false}, 
-          {text: product2, code: 2, delete: false},
-          {text: product3, code: 3, delete: false}, 
-          {text: product4, code: 4, delete: false},
-          {text: product5, code: 5, delete: false},
+          {code: 1, delete: false}, 
+          {code: 2, delete: false},
+          {code: 3, delete: false}, 
+          {code: 4, delete: false},
+          {code: 5, delete: false},
         ],
 
         productData: [
@@ -80,7 +80,7 @@ var InShop2Block = React.createClass({
 
       var productList = this.state.product.map( (v, i) => {
         if (v.delete == false) {                    
-          return React.createElement(v.text, {
+          return React.createElement(product, {
              key: v.code, 
              data: this.state.productData[i],
              cbDelete: this.delete,
@@ -99,17 +99,17 @@ var InShop2Block = React.createClass({
         React.DOM.div ({className: 'InShop2Block_product_quantity'}, 'Quantity'),
         React.DOM.div ({className: 'InShop2Block_product_button'}, 'Control')
         ),
-        productList
+        productList,        
         );
       
     },
   
   });
 
-//product 1
-  var product1 = React.createClass({
+//product
+  var product = React.createClass({
 
-    displayName: 'product1',    
+    displayName: 'product',    
 
     propTypes: {
       data: 
@@ -141,189 +141,6 @@ var InShop2Block = React.createClass({
       let productData = this.props.data;
 
       return React.DOM.div ({className: productData.className, key: productData.name, onClick: this.focused },
-        React.DOM.div ({className: 'InShop2Block_product_name'}, productData.name),
-        React.DOM.div ({className: 'InShop2Block_product_prise'}, productData.prise),
-        React.DOM.div ({className: 'InShop2Block_product_url'}, productData.url),
-        React.DOM.div ({className: 'InShop2Block_product_quantity'}, productData.quantity),
-        React.DOM.div ({className: 'InShop2Block_product_button'}, 
-          React.DOM.input ({type: 'button', value: 'Delete',  onClick: this.delete})
-        )
-        );
-    },
-  });
-
-//product 2
-  var product2 = React.createClass({
-
-    displayName: 'product2',    
-
-    propTypes: {
-      data: 
-        React.PropTypes.shape({
-          className: React.PropTypes.string.isRequired,
-          name: React.PropTypes.string.isRequired,
-          prise: React.PropTypes.number.isRequired,
-          url: React.PropTypes.string.isRequired,
-          quantity: React.PropTypes.number.isRequired,
-        })
-      ,
-      cbDelete: React.PropTypes.func.isRequired,
-      cbSelect: React.PropTypes.func.isRequired,
-      num: React.PropTypes.number.isRequired,      
-    },
-
-    focused: function() {
-      let num = this.props.num;      
-      this.props.cbSelect(num);
-    },
-    
-    delete: function() {
-      let num = this.props.num;
-      this.props.cbDelete(num);
-    },
-
-    render: function() {
-
-      let productData = this.props.data;
-
-      return React.DOM.div ({className: productData.className, key: productData.name, onClick: this.focused},
-        React.DOM.div ({className: 'InShop2Block_product_name'}, productData.name),
-        React.DOM.div ({className: 'InShop2Block_product_prise'}, productData.prise),
-        React.DOM.div ({className: 'InShop2Block_product_url'}, productData.url),
-        React.DOM.div ({className: 'InShop2Block_product_quantity'}, productData.quantity),
-        React.DOM.div ({className: 'InShop2Block_product_button'}, 
-          React.DOM.input ({type: 'button', value: 'Delete',  onClick: this.delete})
-        )
-        );
-    },
-  });
-
-  //product 3
-  var product3 = React.createClass({
-
-    displayName: 'product3',  
-    
-    propTypes: {
-      data: 
-        React.PropTypes.shape({
-          className: React.PropTypes.string.isRequired,
-          name: React.PropTypes.string.isRequired,
-          prise: React.PropTypes.number.isRequired,
-          url: React.PropTypes.string.isRequired,
-          quantity: React.PropTypes.number.isRequired,
-        })
-      ,
-      cbDelete: React.PropTypes.func.isRequired,
-      cbSelect: React.PropTypes.func.isRequired,
-      num: React.PropTypes.number.isRequired,      
-    },
-
-    focused: function() {
-      let num = this.props.num;      
-      this.props.cbSelect(num);
-    },
-    
-    delete: function() {
-      let num = this.props.num;
-      this.props.cbDelete(num);
-    },
-
-    render: function() {
-
-      let productData = this.props.data;
-
-      return React.DOM.div ({className: productData.className, key: productData.name, onClick: this.focused},
-        React.DOM.div ({className: 'InShop2Block_product_name'}, productData.name),
-        React.DOM.div ({className: 'InShop2Block_product_prise'}, productData.prise),
-        React.DOM.div ({className: 'InShop2Block_product_url'}, productData.url),
-        React.DOM.div ({className: 'InShop2Block_product_quantity'}, productData.quantity),
-        React.DOM.div ({className: 'InShop2Block_product_button'}, 
-          React.DOM.input ({type: 'button', value: 'Delete',  onClick: this.delete})
-        )
-        );
-    },
-  });
-//product 4
-  var product4 = React.createClass({
-
-    displayName: 'product4', 
-    
-    propTypes: {
-      data: 
-        React.PropTypes.shape({
-          className: React.PropTypes.string.isRequired,
-          name: React.PropTypes.string.isRequired,
-          prise: React.PropTypes.number.isRequired,
-          url: React.PropTypes.string.isRequired,
-          quantity: React.PropTypes.number.isRequired,
-        })
-      ,
-      cbDelete: React.PropTypes.func.isRequired,
-      cbSelect: React.PropTypes.func.isRequired,
-      num: React.PropTypes.number.isRequired,      
-    },
-
-    focused: function() {
-      let num = this.props.num;      
-      this.props.cbSelect(num);
-    },
-    
-    delete: function() {
-      let num = this.props.num;
-      this.props.cbDelete(num);
-    },
-
-    render: function() {
-
-      let productData = this.props.data;
-
-      return React.DOM.div ({className: productData.className, key: productData.name, onClick: this.focused},
-        React.DOM.div ({className: 'InShop2Block_product_name'}, productData.name),
-        React.DOM.div ({className: 'InShop2Block_product_prise'}, productData.prise),
-        React.DOM.div ({className: 'InShop2Block_product_url'}, productData.url),
-        React.DOM.div ({className: 'InShop2Block_product_quantity'}, productData.quantity),
-        React.DOM.div ({className: 'InShop2Block_product_button'}, 
-          React.DOM.input ({type: 'button', value: 'Delete',  onClick: this.delete})
-        )
-        );
-    },
-  });
-
-  //product 5
-  var product5 = React.createClass({
-
-    displayName: 'product5',    
-
-    propTypes: {
-      data: 
-        React.PropTypes.shape({
-          className: React.PropTypes.string.isRequired,
-          name: React.PropTypes.string.isRequired,
-          prise: React.PropTypes.number.isRequired,
-          url: React.PropTypes.string.isRequired,
-          quantity: React.PropTypes.number.isRequired,
-        })
-      ,
-      cbDelete: React.PropTypes.func.isRequired,
-      cbSelect: React.PropTypes.func.isRequired,
-      num: React.PropTypes.number.isRequired,      
-    },
-
-    focused: function() {
-      let num = this.props.num;      
-      this.props.cbSelect(num);
-    },
-    
-    delete: function() {
-      let num = this.props.num;
-      this.props.cbDelete(num);
-    },
-
-    render: function() {
-
-      let productData = this.props.data;
-
-      return React.DOM.div ({className: productData.className, key: productData.name, onClick: this.focused},
         React.DOM.div ({className: 'InShop2Block_product_name'}, productData.name),
         React.DOM.div ({className: 'InShop2Block_product_prise'}, productData.prise),
         React.DOM.div ({className: 'InShop2Block_product_url'}, productData.url),
