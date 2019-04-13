@@ -16,9 +16,7 @@ var InShop2Block = React.createClass({
 
     select: function(num) {      
       let sel = this.state.productData.slice();
-      sel.forEach(element => {
-        element.className = 'InShop2Block_product';
-      });
+      sel.forEach(element => element.className = 'InShop2Block_product');
       sel[num].className = 'InShop2Block_product focused';
       this.setState({productData: sel, productLast: num})
     },
