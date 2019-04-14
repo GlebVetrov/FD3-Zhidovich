@@ -9,7 +9,7 @@ var InShop2Block = React.createClass({
     
     getInitialState: function () {
       return {
-        productData: this.props.product.slice(),
+        productData: this.props.product,
         productSelect: null,
       }
     },
@@ -21,10 +21,15 @@ var InShop2Block = React.createClass({
       
     },
 
-    delete: function(EO, num) {      
-      let del = this.state.productData;      
-      delete del[num];
-      this.setState({product: del})
+    delete: function(EO, num) {
+      let del = this.state.productData;
+      del = del.filter((obj, i) => {
+        if (num != i ){
+          return obj;
+        }        
+      } 
+      );
+      this.setState({productData: del})
       EO.stopPropagation();
     },
 
