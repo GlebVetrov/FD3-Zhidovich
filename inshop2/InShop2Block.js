@@ -10,15 +10,15 @@ var InShop2Block = React.createClass({
     getInitialState: function () {
       return {
         productData: this.props.product.slice(),
-        productLast: null,
+        productSelect: null,
       }
     },
 
-    select: function(num) {      
-      let sel = this.state.productData.slice();
-      sel.forEach(element => element.className = 'InShop2Block_product');
-      sel[num].className = 'InShop2Block_product focused';
-      this.setState({productData: sel, productLast: num})
+    select: function(num) { 
+      this.setState({
+        productSelect: num,
+      });    
+      
     },
 
     delete: function(EO, num) {      
@@ -29,15 +29,18 @@ var InShop2Block = React.createClass({
     },
 
     render: function() {
-      
-      var productList = this.state.productData.map( (v,i) => {
+      let select = this.state.productSelect;
+      let selectClass = 'InShop2Block_product focused';
+
+      let productList = this.state.productData.map( (v,i) => {
                             
           return React.createElement(product, {
-             key: v.code, 
+             key: v.code,
+             num: i,
+             className: i == select ? selectClass : v.className, 
              data: v,
              cbDelete: this.delete,
-             cbSelect: this.select,
-             num: i,
+             cbSelect: this.select,             
             });
       
       }
@@ -91,8 +94,9 @@ var InShop2Block = React.createClass({
     render: function() {
       
       let productData = this.props.data;
+      let classPro = this.props.className;
 
-      return React.DOM.div ({className: productData.className, key: productData.name, onClick: this.focused },
+      return React.DOM.div ({className: classPro, key: productData.name, onClick: this.focused },
         React.DOM.div ({className: 'InShop2Block_product_name'}, productData.name),
         React.DOM.div ({className: 'InShop2Block_product_prise'}, productData.prise),
         React.DOM.div ({className: 'InShop2Block_product_url'}, productData.url),
