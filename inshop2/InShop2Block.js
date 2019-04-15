@@ -35,14 +35,13 @@ var InShop2Block = React.createClass({
 
     render: function() {
       let select = this.state.productSelect;
-      let selectClass = 'InShop2Block_product focused';
-
+            
       let productList = this.state.productData.map( (v,i) => {
                             
           return React.createElement(product, {
              key: v.code,
              num: i,
-             className: i == select ? selectClass : v.className, 
+             className: i == select ? true : false, 
              data: v,
              cbDelete: this.delete,
              cbSelect: this.select,             
@@ -73,8 +72,7 @@ var InShop2Block = React.createClass({
 
     propTypes: {
       data: 
-        React.PropTypes.shape({
-          className: React.PropTypes.string.isRequired,
+        React.PropTypes.shape({          
           name: React.PropTypes.string.isRequired,
           prise: React.PropTypes.number.isRequired,
           url: React.PropTypes.string.isRequired,
@@ -99,7 +97,13 @@ var InShop2Block = React.createClass({
     render: function() {
       
       let productData = this.props.data;
-      let classPro = this.props.className;
+
+      let isSelectClass = 'InShop2Block_product focused',
+          noSelectClass = 'InShop2Block_product';
+
+      let classPro = this.props.className ? isSelectClass : noSelectClass;
+
+      
 
       return React.DOM.div ({className: classPro, key: productData.name, onClick: this.focused },
         React.DOM.div ({className: 'InShop2Block_product_name'}, productData.name),
