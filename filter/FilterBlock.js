@@ -32,13 +32,6 @@ var FilterBlock = React.createClass({
         if (sort === true) {
             res.sort(function (a, b) {
                 return a.text.localeCompare(b.text);
-                // if (a.text > b.text) {
-                //   return 1;
-                // }
-                // if (a.text < b.text) {
-                //   return -1;
-                // }
-                // return 0;
               })
         }
         this.setState({processStr: res});

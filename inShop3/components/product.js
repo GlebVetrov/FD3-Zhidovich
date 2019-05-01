@@ -32,20 +32,20 @@ class Product extends React.Component {
       
       let productData = this.props.data;
 
-      let isSelectClass = 'InShop2Block_product focused',
-          noSelectClass = 'InShop2Block_product';
+      let isSelectClass = 'InShopBlock_product focused',
+          noSelectClass = 'InShopBlock_product';
 
       let classPro = this.props.className ? isSelectClass : noSelectClass;
 
       
       return (
         <div className = {classPro} key = {productData.name} onClick = {this.focused}>
-          <div className = 'InShop2Block_product_name'>{productData.name}</div>
-          <div className = 'InShop2Block_product_prise'>{productData.prise}</div>
-          <div className = 'InShop2Block_product_url'>{productData.url}</div>
-          <div className = 'InShop2Block_product_quantity'>{productData.quantity}</div>
-          <div className = 'InShop2Block_product_button'>
-            <input type = 'button' value = 'Edit'  onClick = {this.delete}/>
+          <div className = 'InShopBlock_product_name'>{productData.name}</div>
+          <div className = 'InShopBlock_product_prise'>{productData.prise}</div>
+          <div className = 'InShopBlock_product_url'>{productData.url}</div>
+          <div className = 'InShopBlock_product_quantity'>{productData.quantity}</div>
+          <div className = 'InShopBlock_product_button'>
+            <input type = 'button' value = 'Edit'/>
             <input type = 'button' value = 'Delete'  onClick = {this.delete}/>
           </div>
         </div>

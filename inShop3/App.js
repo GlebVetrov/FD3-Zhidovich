@@ -3,11 +3,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import InShop2Block from './components/InShop2Block.js';
+import InShopBlock from './components/InShopBlock.js';
 import productList from './product-date.json' ;
 
 ReactDOM.render(
-    <InShop2Block
+    <InShopBlock
     product = {productList}
     />
     
