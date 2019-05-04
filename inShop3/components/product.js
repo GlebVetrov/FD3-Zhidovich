@@ -36,7 +36,7 @@ class Product extends React.Component {
     }
 
     render() {
-      console.log(this.props.add)
+      
       let productData = this.props.data;
 
       let isSelectClass = 'InShopBlock_product focused',

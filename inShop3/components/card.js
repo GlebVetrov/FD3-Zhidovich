@@ -43,7 +43,7 @@ export default class Product extends React.Component {
     }
 
     changeProduct = (EO) => {
-        console.log(EO.target.value)
+        
         if (EO.target.name === 'name') {
             if (EO.target.value === '') {
                 this.setState({statusValidName: true});
@@ -109,7 +109,7 @@ export default class Product extends React.Component {
     }
 
     render() {
-        console.log(this.state.productData)
+        
         return (
             this.props.edit ?
 

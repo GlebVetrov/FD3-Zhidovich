@@ -113,9 +113,6 @@ class InShopBlock extends React.Component {
     };
 
    if(this.state.addProduct){ list.push(newProduct)};
-    console.log(this.state.productEditNum)
-   
-    
     let productCard = list.filter((v, i) => { //выбор нужного элемента
       if(i === this.state.productEditNum && this.state.editProduct) {
         return v;
@@ -133,7 +130,6 @@ class InShopBlock extends React.Component {
       }
   )
   ;
-  console.log(productCard)
     return ( 
     <div className = "InShopBlock" >
       <div className = "InShopBlock_product" key = "555" >
