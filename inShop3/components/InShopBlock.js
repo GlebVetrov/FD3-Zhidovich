@@ -79,6 +79,7 @@ class InShopBlock extends React.Component {
     this.setState({
       productData: add,
       addProduct: false,
+      editProduct: false,
     })
     return;
   }
