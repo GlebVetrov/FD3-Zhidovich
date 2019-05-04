@@ -12,19 +12,19 @@ export default class Product extends React.Component {
     static propTypes = {
         data: 
         PropTypes.shape({          
-          name: PropTypes.string.isRequired,
-          prise: PropTypes.number.isRequired,
-          url: PropTypes.string.isRequired,
-          quantity: PropTypes.number.isRequired,
+          name: PropTypes.string,
+          prise: PropTypes.number,
+          url: PropTypes.string,
+          quantity: PropTypes.number,
         }),
         num: PropTypes.number, 
         cbAdd: PropTypes.func,
     }
     
     state = {
-        productData: this.props.data,
+        productData: Object.assign({}, this.props.data),
         productId: this.props.num,
-        disButton: false,
+        disButton: this.props.add ? true : false,
         statusValidName: false,
         statusValidUrl: false,
         statusValidPrise: false,
@@ -32,10 +32,18 @@ export default class Product extends React.Component {
     }
 
     addValue = () => {
-
+        let data = this.state.productData;
+        let num = this.state.productId;
+        
+        this.props.cbAdd(data, num);
     }
 
-    changeText = (EO) => {        
+    cancel = () => {        
+        this.props.cbCancel();
+    }
+
+    changeProduct = (EO) => {
+        console.log(EO.target.value)
         if (EO.target.name === 'name') {
             if (EO.target.value === '') {
                 this.setState({statusValidName: true});
@@ -46,8 +54,9 @@ export default class Product extends React.Component {
             let name = this.state.productData;            
             name['name'] = EO.target.value;            
             this.setState({productData: name}, this.checkForm);
+            return;
         }
-        if (EO.target.name == 'url') {
+        if (EO.target.name === 'url') {
             if (EO.target.value === '') {
                 this.setState({statusValidUrl: true});
             }
@@ -57,8 +66,9 @@ export default class Product extends React.Component {
             let url = this.state.productData;
             url['url'] = EO.target.value;            
             this.setState({productData: url}, this.checkForm);
+            return;
         }
-        if (EO.target.name == 'prise') {
+        if (EO.target.name === 'prise') {
             if (EO.target.value === '') {
                 this.setState({statusValidPrise: true});
             }
@@ -68,8 +78,9 @@ export default class Product extends React.Component {
             let prise = this.state.productData;
             prise['prise'] = EO.target.value;            
             this.setState({productData: prise}, this.checkForm);
+            return;
         }
-        if (EO.target.name == 'quantity') { 
+        if (EO.target.name === 'quantity') { 
             if (EO.target.value === '') {
                 this.setState({statusValidQuantity: true});
             }
@@ -79,6 +90,7 @@ export default class Product extends React.Component {
             let quantity = this.state.productData;
             quantity['quantity'] = EO.target.value;            
             this.setState({productData: quantity}, this.checkForm);
+            return;
         }
     }
 
@@ -97,41 +109,44 @@ export default class Product extends React.Component {
     }
 
     render() {
-
+        console.log(this.state.productData)
         return (
-            // <div>
-            //     <h2>Product{productNumber}</h2>
-            //     <ul>
-            //         <li>{productData.name}</li>
-            //         <li>{productData.prise}</li>
-            //         <li>{productData.url}</li>
-            //         <li>{productData.quantity}</li>
-            //     </ul>
-            // </div>
+            this.props.edit ?
+
             <div>
-                <h2>Edit Product</h2>
-                <p>ID:{this.state.productId}</p>
-                <p>
-                    <label>
-                    Name<br/> <input type="text" name = "name"  defaultValue= {this.state.productData.name} onChange = {this.changeText}/>
-                    </label><br/>
-                <span>{this.state.statusValidName ? 'Please, fill the field': null }</span></p>
-                <p>
-                    <label>
-                    Url<br/> <input type="text" name = 'url' defaultValue={this.state.productData.url} onChange = {this.changeText}/>
-                    </label><br/>
-                <span>{this.state.statusValidUrl ? 'Please, fill the field': null }</span></p>
-                <p>
-                    <label>
-                    Prise<br/> <input type="text" name = 'prise' defaultValue={this.state.productData.prise} onChange = {this.changeText}/>
-                    </label><br/>
-                <span>{this.state.statusValidPrise ? 'Please, fill the field': null }</span></p>
-                <p>
-                    <label>
-                    Quantity<br/> <input type="text" name = 'quantity' defaultValue={this.state.productData.quantity} onChange = {this.changeText}/>
-                    </label><br/>
-                <span>{this.state.statusValidQuantity ? 'Please, fill the field': null }</span></p>
-                <p><input type="button" value="Save" disabled = {this.state.disButton}/><input type="button" value="Cansel"/></p>
+            {true && <h2>Edit Product</h2>}
+            <p>ID:{this.state.productId}</p>
+            <p>
+                <label>
+                Name<br/> <input type="text" name = "name"  defaultValue= {this.state.productData.name} onChange = {this.changeProduct}/>
+                </label><br/>
+            <span>{this.state.statusValidName && 'Please, fill the field'}</span></p>
+            <p>
+                <label>
+                Url<br/> <input type="text" name = 'url' defaultValue={this.state.productData.url} onChange = {this.changeProduct}/>
+                </label><br/>
+            <span>{this.state.statusValidUrl && 'Please, fill the field'}</span></p>
+            <p>
+                <label>
+                Prise<br/> <input type="text" name = 'prise' defaultValue={this.state.productData.prise} onChange = {this.changeProduct}/>
+                </label><br/>
+            <span>{this.state.statusValidPrise && 'Please, fill the field'}</span></p>
+            <p>
+                <label>
+                Quantity<br/> <input type="text" name = 'quantity' defaultValue={this.state.productData.quantity} onChange = {this.changeProduct}/>
+                </label><br/>
+            <span>{this.state.statusValidQuantity && 'Please, fill the field'}</span></p>
+            <p><input type="button" value="Save" disabled = {this.state.disButton} onClick = {this.addValue}/><input type="button" value="Cansel" onClick = {this.cancel}/></p>
+            </div>
+            :
+             <div>
+                <h2>Product{this.state.productId}</h2>
+                <ul>
+                    <li>{this.state.productData.name}</li>
+                    <li>{this.state.productData.prise}</li>
+                    <li>{this.state.productData.url}</li>
+                    <li>{this.state.productData.quantity}</li>
+                </ul>
             </div>
         )
     }
