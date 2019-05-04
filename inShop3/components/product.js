@@ -8,9 +8,9 @@ class Product extends React.Component {
       data: 
         PropTypes.shape({          
           name: PropTypes.string,
-          prise: PropTypes.number,
+          prise: PropTypes.any,
           url: PropTypes.string,
-          quantity: PropTypes.number,
+          quantity: PropTypes.any,
         })
       ,
       cbDelete: PropTypes.func.isRequired,

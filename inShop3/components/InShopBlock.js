@@ -96,6 +96,7 @@ class InShopBlock extends React.Component {
 
   render() {
     let select = this.state.productSelect;
+    console.log(this.state.productData)
     
     let productList = this.state.productData.map((v, i) =>
 
@@ -104,9 +105,17 @@ class InShopBlock extends React.Component {
       }
     );
     // добавление нового продукта  
-    let list = this.state.productData.slice();
+    let list = this.state.productData.slice(); //копирую массив
+
+    let num = list.reduce((p, v) => { // уникальный ключ
+      if (typeof(p) === 'object'){
+      p = 0;}  
+        return Math.max(p,v)
+    });
+    
+
     let newProduct = {
-      "code": list.length + 1,
+      "code": num + 1,
       "name": '',
       "prise": '',
       "url": '',
