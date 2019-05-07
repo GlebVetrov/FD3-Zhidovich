@@ -13,7 +13,7 @@ export default (props) => {
     return (
     <div>
         <p>Вы нажали на кнопку: {count}</p>
-        <button onClick = {() => {setCount(count += 1)}}>{text}</button>
+        <button disabled = {text === 'попался'} onClick = {() => {setCount(count += 1); setText('попался')}}>{text}</button>
     </div>
     )
 }
