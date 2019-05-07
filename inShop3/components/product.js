@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import {testEvents} from './events';
 
 class Product extends React.Component {       
 
@@ -21,8 +21,13 @@ class Product extends React.Component {
 
     focused = () => {
       let num = this.props.num;      
-      this.props.cbSelect(num);
+      testEvents.emit('ESelect',num);
     };
+
+    // focused = () => {
+    //   let num = this.props.num;      
+    //   this.props.cbSelect(num);
+    // };
 
     delete = (EO) => {
       let num = this.props.num;      

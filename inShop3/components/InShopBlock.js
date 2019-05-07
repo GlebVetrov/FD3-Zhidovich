@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import {testEvents} from './events';
 
 import Product from './product';
 import Card from './card';
+import Test from './test';
 
 import './InShopBlock.css';
 
@@ -20,6 +21,15 @@ class InShopBlock extends React.Component {
     productEditNum: null, // редактируется продукт?
     addProduct: false,
     editProduct: false,
+    hello: 'hello'
+  };
+
+  componentDidMount = () => {
+    testEvents.addListener('ESelect',this.select);    
+  };
+
+  componentWillUnmount = () => {
+    testEvents.removeListener('ESelect',this.select);    
   };
 
   select = (num) => {
@@ -157,7 +167,8 @@ class InShopBlock extends React.Component {
 
       {
         productCard
-      } 
+      }
+      <Test hello = {this.state.hello}/> 
     </div>
     )
   };
