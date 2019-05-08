@@ -5,11 +5,11 @@ export default (props) => {
     let text = [];
     let prop = props.text.split(br);
     prop.forEach((e,i) => {
-        text.push(e);
-        if (i !== prop.length - 1){
-        text.push(<br key={i}/>);
+        if (i){
+            text.push(<br key={i}/>);
         }
+        text.push(e);        
     });
-    console.log(text);
+    
     return <div className = 'br2jsx'>{text}</div>
 }
