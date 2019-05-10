@@ -1,6 +1,6 @@
 "use strict"
 import React,{Fragment, Component} from 'react';
-import withRainbowFrame from './RainbowColorHoc'
+import withRainbowFrame from './rainbowColorHoc'
 
 export default class RainbowFrame extends Component {
     render() {
