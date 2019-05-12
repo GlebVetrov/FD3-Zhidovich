@@ -25,11 +25,13 @@ class InShopBlock extends React.Component {
   };
 
   componentDidMount = () => {
-    testEvents.addListener('ESelect',this.select);    
+    testEvents.addListener('ESelect',this.select);
+    testEvents.addListener('EDelete',this.delete);       
   };
 
   componentWillUnmount = () => {
-    testEvents.removeListener('ESelect',this.select);    
+    testEvents.removeListener('ESelect',this.select);
+    testEvents.removeListener('EDelete',this.delete);    
   };
 
   select = (num) => {

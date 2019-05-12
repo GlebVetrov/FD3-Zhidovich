@@ -29,9 +29,14 @@ class Product extends React.Component {
     //   this.props.cbSelect(num);
     // };
 
+    // delete = (EO) => {
+    //   let num = this.props.num;      
+    //   this.props.cbDelete(EO, num);
+    // };
+
     delete = (EO) => {
       let num = this.props.num;      
-      this.props.cbDelete(EO, num);
+      testEvents.emit('EDelete', EO, num);
     };
 
     edit = (EO) => {

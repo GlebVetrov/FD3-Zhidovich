@@ -1,0 +1,29 @@
+[{
+    "code": 1,
+    "name": "Иван",
+    "surname": "Иванов",
+    "patronymic": "Петров",
+    "balance": 200,
+    "status": true
+}, {
+    "code": 2,
+    "name": "Сидоров",
+    "surname": "Сидоров",
+    "patronymic": "Сидоров",
+    "balance": 250,
+    "status": true
+}, {
+    "code": 3,
+    "name": "Вася",
+    "surname": "Рад",
+    "patronymic": "Петров",
+    "balance": 180,
+    "status": true
+}, {
+    "code": 4,
+    "name": "Оля",
+    "surname": "Рад",
+    "patronymic": "Петрова",
+    "balance": -280,
+    "status": false
+}]
