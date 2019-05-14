@@ -25,6 +25,14 @@ export default class MobileCard extends Component {
         statusValidStatus: false,
     }
 
+   
+
+      //componentWillUpdate       = ()                   => { console.log('componentWillUpdate');       };
+      //componentDidUpdate        = (oldProps, oldState) => { console.log('componentDidUpdate');        };
+      componentWillMount        = ()                   => { console.log('componentWillMount');        };
+      componentDidMount         = ()                   => { console.log('componentDidMount');         };
+      componentWillUnmount      = ()                   => { console.log('componentWillUnmount');      };  
+
     saveClient = () => {
         let data = this.state.clientData;
         eventEvents.emit('ESaveClient', data);
@@ -102,11 +110,13 @@ export default class MobileCard extends Component {
 
     render() {
         
+        console.log(this.state.clientData.name);
+
         return (            
             <div>
             {true && <h2>Edit Client</h2>}
             <p>ID:{this.state.clientData.code}</p>
-            <p>
+            <p className={this.state.clientData.name}>
                 <label>
                     Name<br/> <input type="text" name = "name"  defaultValue= {this.state.clientData.name} onChange = {this.changeProduct}/>
                 </label><br/>
@@ -131,4 +141,11 @@ export default class MobileCard extends Component {
             </div>            
         )
     }
+
+     componentDidUpdate = (oldProps, oldState) => {
+        console.log('componentDidUpdate');
+        if (oldProps.client !== this.props.client) {     
+        this.setState({clientData: this.props.client, clientId: this.props.client.code}); // сработает при обновлении компонента (WRP+WU+DU)
+           }
+      };
 }

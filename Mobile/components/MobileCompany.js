@@ -56,7 +56,7 @@ class MobileCompany extends Component {
             }
         });
         freeCode.push(code);
-        console.log()
+        
         this.setState({dataClients: clients, freeCode: freeCode})
     }
 
@@ -79,7 +79,7 @@ class MobileCompany extends Component {
         if (status === 1){
         clients.map((v) => {
             if(v.code === client.code){
-                return changedClient;
+                return client;
             }
             return v;
         });
@@ -115,7 +115,7 @@ class MobileCompany extends Component {
       };
 
     render() {
-        console.log('length: '+this.props.clients.length)
+        console.log(this.state.editNumber)
         let showData = this.state.showData;
 
         let clients = this.state.dataClients.filter((v) => {
@@ -137,16 +137,16 @@ class MobileCompany extends Component {
 
         if (editClient === 1) {
             let num = this.state.editNumber;
-            console.log('editNumber: ' + num)
+            
             let arr = this.state.dataClients.filter((v) => {
                 if (v.code ===  num) {
                     return v;
                 }});
-            console.log('arr: ' + arr)
+            
             editClient = arr[0];
         
         } else if (editClient === 2) {
-            console.log(this.state.freeCode)
+            
             editClient = {
                 "code": Math.min(...this.state.freeCode),
                 "name": "",
@@ -155,8 +155,8 @@ class MobileCompany extends Component {
                 "balance": 0
             };
         }
-
-        console.log(this.state.showData)
+        console.log(editClient)
+        
         return (
             <div className='MobileCompany'>
                     <div>
@@ -191,11 +191,12 @@ class MobileCompany extends Component {
                         </table>
                     </div>
                     <div>
-                      {this.state.editClients ? <MobileCard key={this.state.editNumber} client={editClient}/> : <button onClick={this.addClient}>Добавить клиента</button>}
+                      {this.state.editClients ? <MobileCard client={editClient}/> : <button onClick={this.addClient}>Добавить клиента</button>}
                     </div>
             </div>
         )
     }
+    //key = {this.state.editNumber}
 }
 
 export default MobileCompany;

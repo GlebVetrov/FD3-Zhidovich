@@ -15,7 +15,6 @@ class MobileClients extends Component {
 
     state = {
         clientData: this.props.clients,
-        
     }
     
     deleteClient = (EO) => {
@@ -27,10 +26,9 @@ class MobileClients extends Component {
     }
 
     render() {
-      
+
       let clientData = this.state.clientData;
-      console.log(typeof(clientData.balance))
-      
+
       return (
         <tr>
           <td>{clientData.name}</td>
