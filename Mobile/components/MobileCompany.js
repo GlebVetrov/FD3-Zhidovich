@@ -12,8 +12,7 @@ class MobileCompany extends Component {
               name: PropTypes.string.isRequired,
               surname: PropTypes.string.isRequired,
               patronymic: PropTypes.string.isRequired,
-              balance: PropTypes.number.isRequired,  
-              status: PropTypes.bool.isRequired,
+              balance: PropTypes.number.isRequired,
             })
           ),
     }
@@ -24,7 +23,7 @@ class MobileCompany extends Component {
         showData: 1,
         editClients: null,
         editNumber: null,
-        freeCode: [this.props.clients.lenght]
+        freeCode: [this.props.clients.length + 1]
     }
 
     setVelcom = () => {
@@ -61,24 +60,62 @@ class MobileCompany extends Component {
         this.setState({dataClients: clients, freeCode: freeCode})
     }
 
-    editClient = () => {
-        this.setState({editClients: 1})
+    editClient = (code) => {
+        this.setState({editClients: 1, editNumber: code})
     }
 
     addClient = () => {
-        this.setState({editClients: 2})
+        let num = Math.min(...this.state.freeCode);
+        this.setState({editClients: 2, editNumber: num})
+    }
+
+    cancel = () => {
+        this.setState({editClients: null, editNumber: null})
+    }
+
+    saveClient = (client) => {
+        let clients = this.state.dataClients;
+        let status = this.state.editClients;
+        if (status === 1){
+        clients.map((v) => {
+            if(v.code === client.code){
+                return changedClient;
+            }
+            return v;
+        });
+        } 
+        if (status === 2) {
+            let arr = [...this.state.freeCode];
+            if (arr.length === 1) {
+                let inc = arr[0] + 1;
+                arr = [inc]
+                this.setState({freeCode: arr});
+            }
+            if (arr.length !== 1) {
+                let dec = arr.shift();                
+                this.setState({freeCode: dec});
+            }
+            clients.push(client);
+        }
+        this.setState({dataClients: clients, editClients: null, editNumber: null});
     }
 
     componentDidMount = () => {
-        eventEvents.addListener('EDeleteClient',this.deleteClient);        
+        eventEvents.addListener('EDeleteClient',this.deleteClient); 
+        eventEvents.addListener('EEditClient',this.editClient); 
+        eventEvents.addListener('ECancel',this.cancel);
+        eventEvents.addListener('ESaveClient',this.saveClient);        
       };
     
       componentWillUnmount = () => {
-        eventEvents.removeListener('EDeleteClient',this.deleteClient);        
+        eventEvents.removeListener('EDeleteClient',this.deleteClient);
+        eventEvents.removeListener('EEditClient',this.editClient);
+        eventEvents.removeListener('ECancel',this.cancel); 
+        eventEvents.removeListener('ESaveClient',this.saveClient);           
       };
 
     render() {
-
+        console.log('length: '+this.props.clients.length)
         let showData = this.state.showData;
 
         let clients = this.state.dataClients.filter((v) => {
@@ -96,16 +133,27 @@ class MobileCompany extends Component {
             return <MobileClients key={v.code} clients={v}/>
         })
         
-        let editClient = 1;
+        let editClient = this.state.editClients;
 
-        if (editClient) {
-            editClient = this.state.dataClients.filter((v) => {
-                if (v.code ===  editClient) {
+        if (editClient === 1) {
+            let num = this.state.editNumber;
+            console.log('editNumber: ' + num)
+            let arr = this.state.dataClients.filter((v) => {
+                if (v.code ===  num) {
                     return v;
-                }
-        });
-        } else if (0) {
-            editClient = 1;
+                }});
+            console.log('arr: ' + arr)
+            editClient = arr[0];
+        
+        } else if (editClient === 2) {
+            console.log(this.state.freeCode)
+            editClient = {
+                "code": Math.min(...this.state.freeCode),
+                "name": "",
+                "surname": "",
+                "patronymic": "",
+                "balance": 0
+            };
         }
 
         console.log(this.state.showData)
@@ -143,8 +191,7 @@ class MobileCompany extends Component {
                         </table>
                     </div>
                     <div>
-                      {this.state.editClients ? null : <button onClick={this.addClient}>Добавить клиента</button>}
-                      <MobileCard client={editClient}/>
+                      {this.state.editClients ? <MobileCard key={this.state.editNumber} client={editClient}/> : <button onClick={this.addClient}>Добавить клиента</button>}
                     </div>
             </div>
         )

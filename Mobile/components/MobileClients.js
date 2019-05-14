@@ -9,37 +9,37 @@ class MobileClients extends Component {
               name: PropTypes.string.isRequired,
               surname: PropTypes.string.isRequired,
               patronymic: PropTypes.string.isRequired,
-              balance: PropTypes.number.isRequired,  
-              status: PropTypes.bool.isRequired,
+              balance: PropTypes.number.isRequired,
             }),             
     };
 
     state = {
         clientData: this.props.clients,
+        
     }
     
     deleteClient = (EO) => {
-      //this.props.cbSelected(this.props.code);
       eventEvents.emit('EDeleteClient', this.state.clientData.code);
     }
 
-    edit = (EO) => {
-      let edit = true;
-      let num = this.props.num;
-      this.props.cbEdit(EO, edit, num);
+    editClient = (EO) => {
+      eventEvents.emit('EEditClient', this.state.clientData.code);
     }
 
     render() {
+      
       let clientData = this.state.clientData;
+      console.log(typeof(clientData.balance))
+      
       return (
         <tr>
           <td>{clientData.name}</td>
           <td>{clientData.surname}</td>
           <td>{clientData.patronymic}</td>
           <td>{clientData.balance}</td>
-          <td>{clientData.status ? 'active' : 'blocked'}</td>
+          <td>{clientData.balance >= 0 ? 'active' : 'blocked'}</td>
           <td>
-            <input type = 'button' value = 'Edit'  onClick = {this.edit}/>
+            <input type = 'button' value = 'Edit'  onClick = {this.editClient}/>
           </td>
           <td>
             <input type = 'button' value = 'Delete' onClick = {this.deleteClient}/>
