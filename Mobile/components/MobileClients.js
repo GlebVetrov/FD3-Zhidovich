@@ -1,8 +1,8 @@
-import React, {Component, Fragment} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {eventEvents} from './events';
 
-class MobileClients extends Component {       
+export default class MobileClients extends PureComponent {       
 
     static propTypes = {
         clients:  PropTypes.shape({
@@ -15,8 +15,24 @@ class MobileClients extends Component {
 
     state = {
         clientData: this.props.clients,
+        editMode: this.props.edit,
     }
     
+    // shouldComponentUpdate = (newProps,newState) => {
+    //   console.log("MobileClient id="+newProps.clients.name+" shouldComponentUpdate"+newState.clients.name);
+    // };
+
+    componentWillReceiveProps = (newProps) => {
+      console.log("MobileClient id="+this.props.clients.code+" componentWillReceiveProps");
+    this.setState({editMode:newProps.edit});
+    }
+
+    componentDidUpdate = (oldProps, oldState) => {      
+      if ( oldProps.clients!==this.props.clients )  {
+          this.setState({clientData: this.props.clients});
+      }
+    }
+
     deleteClient = (EO) => {
       eventEvents.emit('EDeleteClient', this.state.clientData.code);
     }
@@ -27,8 +43,11 @@ class MobileClients extends Component {
 
     render() {
 
-      let clientData = this.state.clientData;
+      console.log('render: MobileClients id=' +this.props.clients.code)
+      console.log('render: MobileClients id=' +this.props.clients.name)
 
+      let clientData = this.state.clientData;
+      let edit = this.state.editMode;
       return (
         <tr>
           <td>{clientData.name}</td>
@@ -37,14 +56,12 @@ class MobileClients extends Component {
           <td>{clientData.balance}</td>
           <td>{clientData.balance >= 0 ? 'active' : 'blocked'}</td>
           <td>
-            <input type = 'button' value = 'Edit'  onClick = {this.editClient}/>
+            <button disabled={edit} onClick = {this.editClient} >Edit</button>            
           </td>
           <td>
-            <input type = 'button' value = 'Delete' onClick = {this.deleteClient}/>
+            <button disabled={edit} onClick = {this.deleteClient} >Delete</button>
           </td>
         </tr>
       )
     };
   };
-
-  export default MobileClients;

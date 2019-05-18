@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
+import React, {PureComponent, Component} from 'react';
 import PropTypes from 'prop-types';
 
 import MobileClients from './MobileClients';
 import MobileCard from './MobileCard';
+import memoize from 'memoizee';
 import {eventEvents} from './events';
 
-class MobileCompany extends Component {
+export default class MobileCompany extends PureComponent {
     static propTypes = {
         clients: PropTypes.arrayOf(
             PropTypes.shape({
@@ -37,15 +38,18 @@ class MobileCompany extends Component {
     }
 
     showAll = () => {
-        this.setState({showData: 1})
+        let show = 1;
+        this.setState({showData: show})
     }
 
     showActive = () => {
-        this.setState({showData: 2})
+        let show = 2;
+        this.setState({showData: show})
     }
 
     showBlocked = () => {
-        this.setState({showData: 3})
+        let show = 3;
+        this.setState({showData: show})
     }
 
     deleteClient = (code) => {
@@ -74,16 +78,20 @@ class MobileCompany extends Component {
     }
 
     saveClient = (client) => {
-        let clients = this.state.dataClients;
-        let status = this.state.editClients;
+        
+        let clients = this.state.dataClients.slice();
+        let status = this.state.editClients;     
+        
         if (status === 1){
-        clients.map((v) => {
-            if(v.code === client.code){
-                return client;
+        clients = clients.map((v) => {
+            if(v.code === client.code){  
+                let newClient = {...client}              
+                return newClient;
             }
             return v;
         });
         } 
+        
         if (status === 2) {
             let arr = [...this.state.freeCode];
             if (arr.length === 1) {
@@ -97,6 +105,9 @@ class MobileCompany extends Component {
             }
             clients.push(client);
         }
+        
+        
+
         this.setState({dataClients: clients, editClients: null, editNumber: null});
     }
 
@@ -115,53 +126,63 @@ class MobileCompany extends Component {
       };
 
     render() {
-        console.log(this.state.editNumber)
-        let showData = this.state.showData;
 
-        let clients = this.state.dataClients.filter((v) => {
+        console.log('render: MobileCompany')
+        
+        let showData = this.state.showData;
+        
+        let clients = [...this.state.dataClients];
+        let sort = (clients) => {
+            console.log(clients)
+            return clients.filter((v) => {
             if(showData === 1) {
                 return v;
             }
-            if(showData === 2 && v.status === true ) {
+            if(showData === 2 && v.balance >= 0 ) {
                 return v;
             }
-            if(showData === 3 && v.status === false) {
+            if(showData === 3 && v.balance < 0) {
                 return v;
             }            
         })
         .map((v) => {
-            return <MobileClients key={v.code} clients={v}/>
+            return <MobileClients key={v.code} edit={this.state.editClients} clients={v}/>
         })
-        
-        let editClient = this.state.editClients;
-
-        if (editClient === 1) {
-            let num = this.state.editNumber;
-            
-            let arr = this.state.dataClients.filter((v) => {
-                if (v.code ===  num) {
-                    return v;
-                }});
-            
-            editClient = arr[0];
-        
-        } else if (editClient === 2) {
-            
-            editClient = {
-                "code": Math.min(...this.state.freeCode),
-                "name": "",
-                "surname": "",
-                "patronymic": "",
-                "balance": 0
-            };
         }
-        console.log(editClient)
+        let sortMemoizeed=memoize(sort);        
         
+        let client = this.state.editClients;
+
+        let editClient = (client) => {
+            if (client === 1) {
+                let num = this.state.editNumber;
+                
+                let arr = this.state.dataClients.filter((v) => {
+                    if (v.code ===  num) {
+                        return v;
+                    }});
+                
+                return client = arr[0];
+            
+            } else if (client === 2) {
+                
+                return client = {
+                    "code": Math.min(...this.state.freeCode),
+                    "name": "",
+                    "surname": "",
+                    "patronymic": "",
+                    "balance": 0
+                };
+            }
+        }
+
+        let editClientMemoizeed = memoize(editClient);
+                
         return (
             <div className='MobileCompany'>
                     <div>
-                        <button onClick={this.setVelcom}>Velcom</button>
-                        <button onClick={this.setMtc}>MTC</button>
+                        <button disabled={this.state.editClients} onClick={this.setVelcom}>Velcom</button>
+                        <button disabled={this.state.editClients} onClick={this.setMtc}>MTC</button>
                         <br/>
                         Компания:
                         {this.state.status === 1 && 'Velcom'}
@@ -169,9 +190,9 @@ class MobileCompany extends Component {
                         </div>                    
                         <hr/>
                     <div>
-                        <button onClick={this.showAll}>Все</button>
-                        <button onClick={this.showActive}>Активные</button>
-                        <button onClick={this.showBlocked}>Заблокированные</button>
+                        <button disabled={this.state.editClients} onClick={this.showAll}>Все</button>
+                        <button disabled={this.state.editClients} onClick={this.showActive}>Активные</button>
+                        <button disabled={this.state.editClients} onClick={this.showBlocked}>Заблокированные</button>
                     </div>
                         <hr/>
                     <div>
@@ -186,17 +207,15 @@ class MobileCompany extends Component {
                                     <th>Редактировать</th>
                                     <th>Удалить</th>
                                 </tr>
-                                {clients}
+                                {sortMemoizeed(clients)}
                             </tbody>
                         </table>
                     </div>
                     <div>
-                      {this.state.editClients ? <MobileCard client={editClient}/> : <button onClick={this.addClient}>Добавить клиента</button>}
+                      {this.state.editClients ? <MobileCard key = {this.state.editNumber} client={editClientMemoizeed(client)}/> : <button onClick={this.addClient}>Добавить клиента</button>}
                     </div>
             </div>
         )
     }
-    //key = {this.state.editNumber}
+    
 }
-
-export default MobileCompany;
