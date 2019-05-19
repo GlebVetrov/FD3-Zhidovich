@@ -5,7 +5,7 @@ import {eventEvents} from './events';
 export default class MobileClients extends PureComponent {       
 
     static propTypes = {
-        clients:  PropTypes.shape({
+        client:  PropTypes.shape({
               name: PropTypes.string.isRequired,
               surname: PropTypes.string.isRequired,
               patronymic: PropTypes.string.isRequired,
@@ -14,18 +14,17 @@ export default class MobileClients extends PureComponent {
     };
 
     state = {
-        clientData: this.props.clients,
-        editMode: this.props.edit,
+        clientData: this.props.client,        
     }
-    
+
     componentWillReceiveProps = (newProps) => {
-      console.log("MobileClient id="+this.props.clients.code+" componentWillReceiveProps");
+      console.log("MobileClient id="+this.props.client.code+" componentWillReceiveProps");
     this.setState({editMode:newProps.edit});
     }
 
     componentDidUpdate = (oldProps, oldState) => {      
-      if ( oldProps.clients!==this.props.clients )  {
-          this.setState({clientData: this.props.clients});
+      if ( oldProps.client!==this.props.client )  {
+          this.setState({clientData: this.props.client});
       }
     }
 
@@ -39,7 +38,7 @@ export default class MobileClients extends PureComponent {
 
     render() {
 
-      console.log('render: MobileClients id=' +this.props.clients.code)
+      console.log('render: MobileClients id=' +this.props.client.code)
 
       let clientData = this.state.clientData;
       let edit = this.state.editMode;
@@ -51,10 +50,10 @@ export default class MobileClients extends PureComponent {
           <td>{clientData.balance}</td>
           <td>{clientData.balance >= 0 ? 'active' : 'blocked'}</td>
           <td>
-            <button disabled={edit} onClick = {this.editClient} >Edit</button>            
+            <button onClick = {this.editClient} >Edit</button>            
           </td>
           <td>
-            <button disabled={edit} onClick = {this.deleteClient} >Delete</button>
+            <button onClick = {this.deleteClient} >Delete</button>
           </td>
         </tr>
       )

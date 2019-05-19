@@ -1,7 +1,7 @@
 import React, {PureComponent, Component} from 'react';
 import PropTypes from 'prop-types';
 
-import MobileClients from './MobileClients';
+import MobileClient from './MobileClient';
 import MobileCard from './MobileCard';
 import memoize from 'memoizee';
 import {eventEvents} from './events';
@@ -146,7 +146,7 @@ export default class MobileCompany extends PureComponent {
             }            
         })
         .map((v) => {
-            return <MobileClients key={v.code} edit={this.state.editClients} clients={v}/>
+            return <MobileClient key={v.code} client={v}/>
         })
         }
         let sortMemoizeed=memoize(sort);        
@@ -181,8 +181,8 @@ export default class MobileCompany extends PureComponent {
         return (
             <div className='MobileCompany'>
                     <div>
-                        <button disabled={this.state.editClients} onClick={this.setVelcom}>Velcom</button>
-                        <button disabled={this.state.editClients} onClick={this.setMtc}>MTC</button>
+                        <button  onClick={this.setVelcom}>Velcom</button>
+                        <button  onClick={this.setMtc}>MTC</button>
                         <br/>
                         Компания:
                         {this.state.status === 1 && 'Velcom'}
@@ -190,9 +190,9 @@ export default class MobileCompany extends PureComponent {
                         </div>                    
                         <hr/>
                     <div>
-                        <button disabled={this.state.editClients} onClick={this.showAll}>Все</button>
-                        <button disabled={this.state.editClients} onClick={this.showActive}>Активные</button>
-                        <button disabled={this.state.editClients} onClick={this.showBlocked}>Заблокированные</button>
+                        <button onClick={this.showAll}>Все</button>
+                        <button onClick={this.showActive}>Активные</button>
+                        <button onClick={this.showBlocked}>Заблокированные</button>
                     </div>
                         <hr/>
                     <div>

@@ -14,12 +14,11 @@ export default class MobileCard extends PureComponent {
     }
 
     static propTypes = {
-        clients:  PropTypes.shape({
+        client:  PropTypes.shape({
             name: PropTypes.string.isRequired,
             surname: PropTypes.string.isRequired,
             patronymic: PropTypes.string.isRequired,
-            balance: PropTypes.number.isRequired,  
-            status: PropTypes.bool.isRequired,
+            balance: PropTypes.number.isRequired,
           }),
     }
     
