@@ -18,6 +18,10 @@ export default class MobileClients extends PureComponent {
         editMode: this.props.edit,
     }
     
+    // shouldComponentUpdate = (newProps,newState) => {
+    //   console.log("MobileClient id="+newProps.clients.name+" shouldComponentUpdate"+newState.clients.name);
+    // };
+
     componentWillReceiveProps = (newProps) => {
       console.log("MobileClient id="+this.props.clients.code+" componentWillReceiveProps");
     this.setState({editMode:newProps.edit});
@@ -40,6 +44,7 @@ export default class MobileClients extends PureComponent {
     render() {
 
       console.log('render: MobileClients id=' +this.props.clients.code)
+      console.log('render: MobileClients id=' +this.props.clients.name)
 
       let clientData = this.state.clientData;
       let edit = this.state.editMode;

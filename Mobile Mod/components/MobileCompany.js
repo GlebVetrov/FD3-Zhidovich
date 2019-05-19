@@ -133,7 +133,7 @@ export default class MobileCompany extends PureComponent {
         
         let clients = [...this.state.dataClients];
         let sort = (clients) => {
-            
+            console.log(clients)
             return clients.filter((v) => {
             if(showData === 1) {
                 return v;
