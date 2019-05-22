@@ -6,7 +6,7 @@
   "scripts": {
     "build": ".\\node_modules\\.bin\\webpack",
     "dev:watch": ".\\node_modules\\.bin\\webpack --mode development --watch",
-    "start": ".\\node_modules\\.bin\\webpack-dev-server --progress --colors --open --history-api-fallback"
+    "start": ".\\node_modules\\.bin\\webpack-dev-server --progress --colors --open"
   },
   "author": "Gleb",
   "license": "ISC",

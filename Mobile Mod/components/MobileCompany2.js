@@ -20,11 +20,11 @@ export default class MobileCompany extends PureComponent {
 
     state = {
         status: null,
-        dataClients: this.props.clients,
+        dataClients: JSON.parse(this.props.companyData.result),
         showData: 1,
         editClients: null,
         editNumber: null,
-        freeCode: [this.props.clients.length + 1]
+        freeCode: [JSON.parse(this.props.companyData.result).length + 1]
     }
 
     setVelcom = () => {
@@ -111,6 +111,8 @@ export default class MobileCompany extends PureComponent {
         this.setState({dataClients: clients, editClients: null, editNumber: null});
     }
 
+    events = 'dd'
+
     componentDidMount () {
         eventEvents.addListener('EDeleteClient',this.deleteClient); 
         eventEvents.addListener('EEditClient',this.editClient); 
@@ -128,7 +130,9 @@ export default class MobileCompany extends PureComponent {
     render() {
 
         console.log('render: MobileCompany')
-        
+
+        console.log(this.events)
+
         let showData = this.state.showData;
         
         let clients = [...this.state.dataClients];

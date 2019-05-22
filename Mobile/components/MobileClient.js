@@ -18,7 +18,7 @@ export default class MobileClients extends PureComponent {
     }
 
     componentWillReceiveProps = (newProps) => {
-      console.log("MobileClient id="+this.props.client.code+" componentWillReceiveProps");
+      console.log("MobileClient id="+newProps.client.code+" componentWillReceiveProps");
     }
 
     componentDidUpdate = (oldProps, oldState) => {      

@@ -22,12 +22,11 @@ export default class MobileClients extends PureComponent {
     //   console.log("MobileClient id="+newProps.clients.name+" shouldComponentUpdate"+newState.clients.name);
     // };
 
-    componentWillReceiveProps = (newProps) => {
-      console.log("MobileClient id="+this.props.clients.code+" componentWillReceiveProps");
-    this.setState({editMode:newProps.edit});
+    componentWillReceiveProps (newProps) {
+      console.log("MobileClient id="+this.props.clients.code+" componentWillReceiveProps");    
     }
 
-    componentDidUpdate = (oldProps, oldState) => {      
+    componentDidUpdate (oldProps, oldState) {      
       if ( oldProps.clients!==this.props.clients )  {
           this.setState({clientData: this.props.clients});
       }
