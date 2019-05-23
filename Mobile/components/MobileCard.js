@@ -187,7 +187,7 @@ export default class MobileCard extends PureComponent {
                 </label><br/>
             <span>{this.state.statusValidBalance && 'Please, fill the field'}</span></p>
                 <p><input type="button" value="Save" disabled = {this.state.saveButton} onClick = {this.setNewText}/>
-                <input type="button" value="Cansel" onClick = {this.cancel}/></p>
+                <input type="button" value="Cancel" onClick = {this.cancel}/></p>
             </div>            
         )
     }

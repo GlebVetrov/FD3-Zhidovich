@@ -49,10 +49,10 @@ export default class MobileClients extends PureComponent {
           <td>{clientData.balance}</td>
           <td>{clientData.balance >= 0 ? 'active' : 'blocked'}</td>
           <td>
-            <button onClick = {this.editClient} >Edit</button>            
+            <button value={`edit${this.state.clientData.code}`} onClick = {this.editClient} >Edit</button>            
           </td>
           <td>
-            <button onClick = {this.deleteClient} >Delete</button>
+            <button value={`delete${this.state.clientData.code}`} onClick = {this.deleteClient} >Delete</button>
           </td>
         </tr>
       )

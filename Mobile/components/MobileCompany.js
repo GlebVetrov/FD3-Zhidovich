@@ -180,7 +180,7 @@ export default class MobileCompany extends PureComponent {
                 
         return (
             <div className='MobileCompany'>
-                    <div>
+                    {/* <div>
                         <button  onClick={this.setVelcom}>Velcom</button>
                         <button  onClick={this.setMtc}>MTC</button>
                         <br/>
@@ -188,11 +188,11 @@ export default class MobileCompany extends PureComponent {
                         {this.state.status === 1 && 'Velcom'}
                         {this.state.status === 2 && 'MTC'}
                         </div>                    
-                        <hr/>
+                        <hr/> */}
                     <div>
-                        <button onClick={this.showAll}>Все</button>
-                        <button onClick={this.showActive}>Активные</button>
-                        <button onClick={this.showBlocked}>Заблокированные</button>
+                        <button value='all' onClick={this.showAll}>Все</button>
+                        <button value='active' onClick={this.showActive}>Активные</button>
+                        <button value='block' onClick={this.showBlocked}>Заблокированные</button>
                     </div>
                         <hr/>
                     <div>
@@ -212,7 +212,7 @@ export default class MobileCompany extends PureComponent {
                         </table>
                     </div>
                     <div>
-                      {this.state.editClients ? <MobileCard key = {this.state.editNumber} client={editClientMemoizeed(client)}/> : <button onClick={this.addClient}>Добавить клиента</button>}
+                      {this.state.editClients ? <MobileCard key = {this.state.editNumber} client={editClientMemoizeed(client)}/> : <button value='add' onClick={this.addClient}>Добавить клиента</button>}
                     </div>
             </div>
         )
