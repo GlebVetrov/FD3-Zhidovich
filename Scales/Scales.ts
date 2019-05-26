@@ -30,7 +30,8 @@ class Scales {
 class Product {
      scale: number;
      name: string;
-     constructor(_scale:number, _name:string) {          
+     constructor(_scale:number, _name:string);
+     constructor(_scale:any, _name:any) {          
           this.scale = _scale;
           this.name = _name;
      }
@@ -43,20 +44,23 @@ class Product {
      }
 }
 
-class Tomato extends Product { 
-     constructor(_scale:number, _name:string) {
+class Tomato extends Product {
+     constructor(_scale:number, _name:string); 
+     constructor(_scale:any, _name:any) {
           super(_scale, _name)
      }
 }
 
 class Apple extends Product {
-     constructor(_scale:number, _name:string) {
+     constructor(_scale:number, _name:string); 
+     constructor(_scale:any, _name:any) {
           super(_scale, _name)          
      }
 }
 
 class Orange extends Product {
-     constructor(_scale:number, _name:string) {
+     constructor(_scale:number, _name:string); 
+     constructor(_scale:any, _name:any) {
           super(_scale, _name)          
      }
 }
