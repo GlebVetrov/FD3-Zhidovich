@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import memoize from 'memoizee';
-import {eventEvents} from './events';
 
 export default class MobileCard extends PureComponent {
    
@@ -160,7 +159,7 @@ export default class MobileCard extends PureComponent {
     render() {
         
         console.log('render: MobileCard');
-        
+        console.log(this.props.events);
 
         return (            
             <div>
@@ -187,7 +186,7 @@ export default class MobileCard extends PureComponent {
                 </label><br/>
             <span>{this.state.statusValidBalance && 'Please, fill the field'}</span></p>
                 <p><input type="button" value="Save" disabled = {this.state.saveButton} onClick = {this.setNewText}/>
-                <input type="button" value="Cancel" onClick = {this.cancel}/></p>
+                <input type="button" value="Cancel" onClick = { ()=>this.props.events.emit('ECancel') }/></p>
             </div>            
         )
     }

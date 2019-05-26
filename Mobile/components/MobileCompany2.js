@@ -6,9 +6,9 @@ import MobileCard from './MobileCard';
 import memoize from 'memoizee';
 import {EventEmitter} from 'events';
 
-let eventEvents = new EventEmitter();
+let eventEvents2 = new EventEmitter();
 
-export default class MobileCompany extends PureComponent {
+export default class MobileCompany2 extends PureComponent {
     static propTypes = {
         clients: PropTypes.arrayOf(
             PropTypes.shape({
@@ -114,17 +114,17 @@ export default class MobileCompany extends PureComponent {
     }
     
     componentDidMount = () => {
-        eventEvents.addListener('EDeleteClient',this.deleteClient); 
-        eventEvents.addListener('EEditClient',this.editClient); 
-        eventEvents.addListener('ECancel',this.cancel);
-        eventEvents.addListener('ESaveClient',this.saveClient);        
+        eventEvents2.addListener('EDeleteClient',this.deleteClient); 
+        eventEvents2.addListener('EEditClient',this.editClient); 
+        eventEvents2.addListener('ECancel',this.cancel);
+        eventEvents2.addListener('ESaveClient',this.saveClient);        
       };
     
       componentWillUnmount = () => {
-        eventEvents.removeListener('EDeleteClient',this.deleteClient);
-        eventEvents.removeListener('EEditClient',this.editClient);
-        eventEvents.removeListener('ECancel',this.cancel); 
-        eventEvents.removeListener('ESaveClient',this.saveClient);           
+        eventEvents2.removeListener('EDeleteClient',this.deleteClient);
+        eventEvents2.removeListener('EEditClient',this.editClient);
+        eventEvents2.removeListener('ECancel',this.cancel); 
+        eventEvents2.removeListener('ESaveClient',this.saveClient);           
       };
 
     render() {
@@ -148,7 +148,7 @@ export default class MobileCompany extends PureComponent {
             }            
         })
         .map((v) => {
-            return <MobileClient events = {eventEvents} key={v.code} client={v}/>
+            return <MobileClient events = {eventEvents2} key={v.code} client={v}/>
         })
         }
         let sortMemoizeed=memoize(sort);        
@@ -214,7 +214,7 @@ export default class MobileCompany extends PureComponent {
                         </table>
                     </div>
                     <div>
-                      {this.state.editClients ? <MobileCard events = {eventEvents} key = {this.state.editNumber} client={editClientMemoizeed(client)}/> : <button value='add' onClick={this.addClient}>Добавить клиента</button>}
+                      {this.state.editClients ? <MobileCard events = {eventEvents2} key = {this.state.editNumber} client={editClientMemoizeed(client)}/> : <button value='add' onClick={this.addClient}>Добавить клиента</button>}
                     </div>
             </div>
         )

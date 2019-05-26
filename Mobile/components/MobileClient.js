@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {eventEvents} from './events';
+
 
 export default class MobileClients extends PureComponent {       
 
@@ -12,7 +12,7 @@ export default class MobileClients extends PureComponent {
               balance: PropTypes.number.isRequired,
             }),             
     };
-
+    
     state = {
         clientData: this.props.client,        
     }
@@ -38,6 +38,7 @@ export default class MobileClients extends PureComponent {
     render() {
 
       console.log('render: MobileClients id=' +this.props.client.code)
+      console.log(this.props.events)
 
       let clientData = this.state.clientData;
       let edit = this.state.editMode;
@@ -49,10 +50,10 @@ export default class MobileClients extends PureComponent {
           <td>{clientData.balance}</td>
           <td>{clientData.balance >= 0 ? 'active' : 'blocked'}</td>
           <td>
-            <button value={`edit${this.state.clientData.code}`} onClick = {this.editClient} >Edit</button>            
+            <button value={`edit${this.state.clientData.code}`} onClick = { ()=>this.props.events.emit('EEditClient', this.state.clientData.code) } >Edit</button>            
           </td>
           <td>
-            <button value={`delete${this.state.clientData.code}`} onClick = {this.deleteClient} >Delete</button>
+            <button value={`delete${this.state.clientData.code}`} onClick = { ()=>this.props.events.emit('EDeleteClient', this.state.clientData.code) } >Delete</button>
           </td>
         </tr>
       )
