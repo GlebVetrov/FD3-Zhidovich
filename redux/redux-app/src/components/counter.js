@@ -1,6 +1,9 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
-export default ({ counter, inc, dec, rnd }) => {
+const Counter = ({ counter, inc, dec, rnd }) => {
     return (
         <div className="jumbotron">
             <h2>{ counter }</h2>
@@ -10,3 +13,11 @@ export default ({ counter, inc, dec, rnd }) => {
         </div>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        counter: state,
+    }
+}
+
+export default connect(mapStateToProps, actions)(Counter);
