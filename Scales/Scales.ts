@@ -1,29 +1,27 @@
-type Products = Tomato | Orange | Apple;
-
 class Scales {
      
-     products: Array < Products > = [];
-     constructor(..._products: Array < Products > ) {
+     products: Array < Product > = [];
+     constructor(..._products: Array < Product > ) {
           this.products = _products;
      }
-     add(_product: Products): void {
+     add(_product: Product): void {
           this.products.push(_product)
      }
 
-     getSumScale(): void {
+     getSumScale(): number {
           let sum:number = 0;
           this.products.forEach((element) => {
                sum = sum + element.getScale();
           });
-          console.log(sum);
+          return sum;
      }
 
-     getNameList(): void {
+     getNameList(): Array <string> {
           let names:Array<string> = [];
           this.products.forEach((element) => {
                names.push(element.getName())
           });
-          console.log(names);
+          return names;
      }
 }
 
@@ -45,22 +43,19 @@ class Product {
 }
 
 class Tomato extends Product {
-     constructor(_scale:number, _name:string); 
-     constructor(_scale:any, _name:any) {
+     constructor(_scale:number, _name:string) {
           super(_scale, _name)
      }
 }
 
 class Apple extends Product {
-     constructor(_scale:number, _name:string); 
-     constructor(_scale:any, _name:any) {
+     constructor(_scale:number, _name:string) {
           super(_scale, _name)          
      }
 }
 
 class Orange extends Product {
-     constructor(_scale:number, _name:string); 
-     constructor(_scale:any, _name:any) {
+     constructor(_scale:number, _name:string) {
           super(_scale, _name)          
      }
 }
@@ -73,5 +68,5 @@ let orange = new Orange (100, 'orange')
 let scales = new Scales (tomato, apple, apple, tomato);
 
 scales.add(orange)
-scales.getNameList();
-scales.getSumScale();
+console.log(scales.getNameList());
+console.log(scales.getSumScale());

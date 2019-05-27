@@ -28,14 +28,14 @@ var Scales = /** @class */ (function () {
         this.products.forEach(function (element) {
             sum = sum + element.getScale();
         });
-        console.log(sum);
+        return sum;
     };
     Scales.prototype.getNameList = function () {
         var names = [];
         this.products.forEach(function (element) {
             names.push(element.getName());
         });
-        console.log(names);
+        return names;
     };
     return Scales;
 }());
@@ -78,6 +78,6 @@ var apple = new Apple(70, 'apple');
 var orange = new Orange(100, 'orange');
 var scales = new Scales(tomato, apple, apple, tomato);
 scales.add(orange);
-scales.getNameList();
-scales.getSumScale();
+console.log(scales.getNameList());
+console.log(scales.getSumScale());
 //# sourceMappingURL=Scales.js.map
