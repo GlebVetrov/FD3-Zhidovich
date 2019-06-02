@@ -12,8 +12,10 @@ class BookList extends React.Component {
             <ul>
                 {
                     books.map((book) => {
-                        return (<li></li>)
-                    }) 
+                        return (<li key={book.isbn}>
+                                    <BookListItem book = { book } />
+                                </li>)
+                    })
                 }
             </ul>
         )

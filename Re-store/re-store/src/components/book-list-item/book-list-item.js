@@ -2,10 +2,11 @@ import React from 'react';
 import './book-list-item.css';
 
 const BookListItem = ({ book }) => {
-    const { title, author } = book;
+    const { title, authors, thumbnailUrl: url } = book;
     return <React.Fragment>
-        <span>{title}</span>
-        <span>{author}</span>
+        <span>{'Название: "' + title+'"  '}</span>
+        <span>{'Автор: ' + authors}</span>
+        <img src={url}/>
     </React.Fragment>
 } 
 
