@@ -2,6 +2,9 @@ var Scales = /** @class */ (function () {
     function Scales(_item) {
         this.item = _item;
     }
+    Scales.prototype.add = function (_item) {
+        this.item.addItem(_item);
+    };
     Scales.prototype.getSumScale = function () {
         var len = this.item.getCount();
         var sum = 0;
@@ -9,17 +12,15 @@ var Scales = /** @class */ (function () {
             var obj = this.item.getItem(i);
             sum = sum + obj.getScale();
         }
-        console.log(this.item);
         return sum;
     };
     Scales.prototype.getNameList = function () {
         var len = this.item.getCount();
-        var name = '';
+        var name = [];
         for (var i = 0; i < len; i++) {
             var obj = this.item.getItem(i);
-            name = name + " " + obj.getName();
+            name.push(obj.getName());
         }
-        console.log(this.item);
         return name;
     };
     return Scales;
@@ -42,6 +43,33 @@ var ScalesStorageEngineArray = /** @class */ (function () {
     ;
     return ScalesStorageEngineArray;
 }());
+var ScalesStorageEngineLocalStorage = /** @class */ (function () {
+    function ScalesStorageEngineLocalStorage() {
+        this.product = [];
+    }
+    ScalesStorageEngineLocalStorage.prototype.addItem = function (_item) {
+        this.product.push(_item);
+        localStorage['product'] = JSON.stringify(this.product);
+    };
+    ;
+    ScalesStorageEngineLocalStorage.prototype.getItem = function (_index) {
+        if (localStorage['product']) {
+            var arr = JSON.parse(localStorage['product']);
+            return arr[_index];
+        }
+        return;
+    };
+    ;
+    ScalesStorageEngineLocalStorage.prototype.getCount = function () {
+        if (localStorage['product']) {
+            var arr = JSON.parse(localStorage['product']);
+            return arr.length;
+        }
+        return 0;
+    };
+    ;
+    return ScalesStorageEngineLocalStorage;
+}());
 var Product = /** @class */ (function () {
     function Product(_scale, _name) {
         this.scale = _scale;
@@ -59,11 +87,20 @@ var tomato = new Product(10, 'tomato');
 var apple = new Product(20, 'apple');
 var orange = new Product(30, 'orange');
 var storageArray = new ScalesStorageEngineArray();
-storageArray.addItem(tomato);
-storageArray.addItem(apple);
-storageArray.addItem(orange);
-console.log(storageArray.getCount());
-console.log(storageArray.getItem(1));
-var scale = new Scales(storageArray);
-console.log(scale.getNameList(), scale.getSumScale());
+var storageLocal = new ScalesStorageEngineLocalStorage();
+var scaleArray = new Scales(storageArray);
+// let scaleLocal = new Scales<ScalesStorageEngineLocalStorage> (storageLocal);
+scaleArray.add(tomato);
+scaleArray.add(apple);
+scaleArray.add(orange);
+// scaleLocal.add(tomato);
+// scaleLocal.add(apple);
+// scaleLocal.add(orange);
+console.log(scaleArray.getNameList());
+console.log(scaleArray.getSumScale());
+// console.log(scaleLocal.getNameList());
+// console.log(scaleLocal.getSumScale());
+storageLocal.addItem(tomato);
+var a = storageLocal.getItem(0);
+console.log(a);
 //# sourceMappingURL=Scales.js.map

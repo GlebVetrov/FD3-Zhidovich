@@ -14,6 +14,10 @@ class Scales<StorageEngine extends IStorageEngine> {
           
      }
 
+     add(_item: Product):void {
+          this.item.addItem(_item);
+     }
+
      getSumScale(): number {
           let len: number = this.item.getCount();
           let sum:number = 0;
@@ -21,18 +25,18 @@ class Scales<StorageEngine extends IStorageEngine> {
                let obj: Product = this.item.getItem(i);
                sum = sum + obj.getScale();
           }
-          console.log(this.item);
+          
           return sum;
      }
 
-     getNameList(): string {
+     getNameList(): string[] {
           let len: number = this.item.getCount();
-          let name:string ='';
+          let name: string[]  = [];
           for (let i = 0; i < len; i++) {
                let obj: Product = this.item.getItem(i);
-               name = name + " " + obj.getName();
+               name.push(obj.getName());
           }
-          console.log(this.item);
+          
           return name;
      }
 }
@@ -56,6 +60,35 @@ class ScalesStorageEngineArray implements IStorageEngine{
      };
      getCount():number{
         return this.product.length;
+     };
+}
+
+class ScalesStorageEngineLocalStorage implements IStorageEngine{
+     
+     product: Array < Product >  = [];
+
+     constructor() {
+
+     }
+
+     addItem(_item: Product): void {
+          this.product.push(_item);
+          localStorage['product'] = JSON.stringify(this.product);
+     };
+
+     getItem(_index: number): Product{
+          if (localStorage['product']) {
+            let arr: Array <Product> = JSON.parse(localStorage['product']);
+            return arr[_index];
+          }
+          return;
+     };
+     getCount():number{
+          if (localStorage['product']) {
+               let arr: Array <Product> = JSON.parse(localStorage['product']);
+               return arr.length;
+          }
+          return 0;
      };
 }
 
@@ -85,16 +118,26 @@ let apple: Product =  new Product(20, 'apple');
 let orange: Product =  new Product(30, 'orange');
 
 let storageArray:ScalesStorageEngineArray  = new ScalesStorageEngineArray();
-
-storageArray.addItem(tomato);
-storageArray.addItem(apple);
-storageArray.addItem(orange);
+let storageLocal:ScalesStorageEngineLocalStorage  = new ScalesStorageEngineLocalStorage();
 
 
-console.log(storageArray.getCount());
-console.log(storageArray.getItem(1));
+let scaleArray = new Scales<ScalesStorageEngineArray> (storageArray);
+// let scaleLocal = new Scales<ScalesStorageEngineLocalStorage> (storageLocal);
 
+scaleArray.add(tomato);
+scaleArray.add(apple);
+scaleArray.add(orange);
 
-let scale = new Scales<ScalesStorageEngineArray> (storageArray);
+// scaleLocal.add(tomato);
+// scaleLocal.add(apple);
+// scaleLocal.add(orange);
 
-console.log(scale.getNameList(), scale.getSumScale());
+console.log(scaleArray.getNameList());
+console.log(scaleArray.getSumScale());
+
+// console.log(scaleLocal.getNameList());
+// console.log(scaleLocal.getSumScale());
+
+storageLocal.addItem(tomato);
+let a = storageLocal.getItem(0);
+console.log(a);
