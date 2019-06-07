@@ -105,7 +105,7 @@ class ScalesStorageEngineLocalStorage implements IStorageEngine{
 
      getItem(_index: number): Product{
           if (localStorage['product']) {
-            let arr = JSON.parse(localStorage['product']);
+            let arr: any = JSON.parse(localStorage['product']);
             let name: string = arr[_index].name;
             let scale: number = arr[_index].scale;
             let product: Product = new Product(scale, name);  
@@ -116,7 +116,7 @@ class ScalesStorageEngineLocalStorage implements IStorageEngine{
      };
      getCount():number{
           if (localStorage['product']) {
-               let arr: Array <Product> = JSON.parse(localStorage['product']);
+               let arr: any= JSON.parse(localStorage['product']);
                return arr.length;
           }
           return 0;
