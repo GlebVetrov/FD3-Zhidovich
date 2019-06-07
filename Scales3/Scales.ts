@@ -41,6 +41,26 @@ class Scales<StorageEngine extends IStorageEngine> {
      }
 }
 
+class Product {
+
+     private scale: number;
+     private name: string ;
+
+     constructor(_scale:number, _name: string) {
+          this.scale = _scale;
+          this.name = _name;
+     }
+
+          getScale(): number {
+               return this.scale;
+          }
+          
+          getName(): string {
+                return this.name;
+          }
+
+}
+
 class ScalesStorageEngineArray implements IStorageEngine{
 
      product: Array < Product >  = [];
@@ -72,14 +92,25 @@ class ScalesStorageEngineLocalStorage implements IStorageEngine{
      }
 
      addItem(_item: Product): void {
-          this.product.push(_item);
-          localStorage['product'] = JSON.stringify(this.product);
+          if (localStorage['product']) {
+               this.product =  JSON.parse(localStorage['product']);
+               this.product.push(_item);
+               localStorage['product'] = JSON.stringify(this.product);
+          } else {
+               this.product.push(_item);
+               localStorage['product'] = JSON.stringify(this.product);
+          }
+          
      };
 
      getItem(_index: number): Product{
           if (localStorage['product']) {
-            let arr: Array <Product> = JSON.parse(localStorage['product']);
-            return arr[_index];
+            let arr = JSON.parse(localStorage['product']);
+            let name: string = arr[_index].name;
+            let scale: number = arr[_index].scale;
+            let product: Product = new Product(scale, name);  
+            console.log(product);      
+            return product;
           }
           return;
      };
@@ -92,52 +123,29 @@ class ScalesStorageEngineLocalStorage implements IStorageEngine{
      };
 }
 
-class Product {
-
-     private scale: number;
-     private name: string ;
-
-     constructor(_scale:number, _name: string) {
-          this.scale = _scale;
-          this.name = _name;
-     }
-
-          getScale(): number {
-               return this.scale;
-          }
-          
-          getName(): string {
-                return this.name;
-          }
-
-}
-
 
 let tomato: Product =  new Product(10, 'tomato');
 let apple: Product =  new Product(20, 'apple');
 let orange: Product =  new Product(30, 'orange');
 
+
 let storageArray:ScalesStorageEngineArray  = new ScalesStorageEngineArray();
 let storageLocal:ScalesStorageEngineLocalStorage  = new ScalesStorageEngineLocalStorage();
 
-
+// почемуто тут могу менять местами storageLocal и storageArray и нет ошибкиж
 let scaleArray = new Scales<ScalesStorageEngineArray> (storageArray);
-// let scaleLocal = new Scales<ScalesStorageEngineLocalStorage> (storageLocal);
+let scaleLocal = new Scales<ScalesStorageEngineLocalStorage> (storageLocal);
 
 scaleArray.add(tomato);
 scaleArray.add(apple);
 scaleArray.add(orange);
 
-// scaleLocal.add(tomato);
-// scaleLocal.add(apple);
-// scaleLocal.add(orange);
+scaleLocal.add(tomato);
+scaleLocal.add(apple);
+scaleLocal.add(orange);
 
 console.log(scaleArray.getNameList());
 console.log(scaleArray.getSumScale());
 
-// console.log(scaleLocal.getNameList());
-// console.log(scaleLocal.getSumScale());
-
-storageLocal.addItem(tomato);
-let a = storageLocal.getItem(0);
-console.log(a);
+console.log(scaleLocal.getNameList());
+console.log(scaleLocal.getSumScale());

@@ -25,6 +25,19 @@ var Scales = /** @class */ (function () {
     };
     return Scales;
 }());
+var Product = /** @class */ (function () {
+    function Product(_scale, _name) {
+        this.scale = _scale;
+        this.name = _name;
+    }
+    Product.prototype.getScale = function () {
+        return this.scale;
+    };
+    Product.prototype.getName = function () {
+        return this.name;
+    };
+    return Product;
+}());
 var ScalesStorageEngineArray = /** @class */ (function () {
     function ScalesStorageEngineArray() {
         this.product = [];
@@ -48,14 +61,25 @@ var ScalesStorageEngineLocalStorage = /** @class */ (function () {
         this.product = [];
     }
     ScalesStorageEngineLocalStorage.prototype.addItem = function (_item) {
-        this.product.push(_item);
-        localStorage['product'] = JSON.stringify(this.product);
+        if (localStorage['product']) {
+            this.product = JSON.parse(localStorage['product']);
+            this.product.push(_item);
+            localStorage['product'] = JSON.stringify(this.product);
+        }
+        else {
+            this.product.push(_item);
+            localStorage['product'] = JSON.stringify(this.product);
+        }
     };
     ;
     ScalesStorageEngineLocalStorage.prototype.getItem = function (_index) {
         if (localStorage['product']) {
             var arr = JSON.parse(localStorage['product']);
-            return arr[_index];
+            var name_1 = arr[_index].name;
+            var scale = arr[_index].scale;
+            var product = new Product(scale, name_1);
+            console.log(product);
+            return product;
         }
         return;
     };
@@ -70,37 +94,21 @@ var ScalesStorageEngineLocalStorage = /** @class */ (function () {
     ;
     return ScalesStorageEngineLocalStorage;
 }());
-var Product = /** @class */ (function () {
-    function Product(_scale, _name) {
-        this.scale = _scale;
-        this.name = _name;
-    }
-    Product.prototype.getScale = function () {
-        return this.scale;
-    };
-    Product.prototype.getName = function () {
-        return this.name;
-    };
-    return Product;
-}());
 var tomato = new Product(10, 'tomato');
 var apple = new Product(20, 'apple');
 var orange = new Product(30, 'orange');
 var storageArray = new ScalesStorageEngineArray();
 var storageLocal = new ScalesStorageEngineLocalStorage();
 var scaleArray = new Scales(storageArray);
-// let scaleLocal = new Scales<ScalesStorageEngineLocalStorage> (storageLocal);
+var scaleLocal = new Scales(storageLocal);
 scaleArray.add(tomato);
 scaleArray.add(apple);
 scaleArray.add(orange);
-// scaleLocal.add(tomato);
-// scaleLocal.add(apple);
-// scaleLocal.add(orange);
+scaleLocal.add(tomato);
+scaleLocal.add(apple);
+scaleLocal.add(orange);
 console.log(scaleArray.getNameList());
 console.log(scaleArray.getSumScale());
-// console.log(scaleLocal.getNameList());
-// console.log(scaleLocal.getSumScale());
-storageLocal.addItem(tomato);
-var a = storageLocal.getItem(0);
-console.log(a);
+console.log(scaleLocal.getNameList());
+console.log(scaleLocal.getSumScale());
 //# sourceMappingURL=Scales.js.map
