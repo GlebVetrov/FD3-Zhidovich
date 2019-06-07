@@ -132,7 +132,7 @@ let orange: Product =  new Product(30, 'orange');
 let storageArray:ScalesStorageEngineArray  = new ScalesStorageEngineArray();
 let storageLocal:ScalesStorageEngineLocalStorage  = new ScalesStorageEngineLocalStorage();
 
-// почемуто тут могу менять местами storageLocal и storageArray и нет ошибкиж
+// почему то тут могу менять местами storageLocal и storageArray и нет ошибки
 let scaleArray = new Scales<ScalesStorageEngineArray> (storageArray);
 let scaleLocal = new Scales<ScalesStorageEngineLocalStorage> (storageLocal);
 
