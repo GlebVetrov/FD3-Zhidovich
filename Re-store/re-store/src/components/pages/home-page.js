@@ -5,9 +5,8 @@ import books from './books.json';
 
 const HomePage = () => {
     return (
-        <BookList books={books} />
+        <BookList />
     )
-    {/*<div>Home Page</div>*/}
 };
 
 export default HomePage;

@@ -1,5 +1,6 @@
 import React from 'react';
 import BookListItem from '../book-list-item'
+import { connect } from 'react-redux';
 
 import './book-list';
 
@@ -11,7 +12,7 @@ class BookList extends React.Component {
         return (
             <ul>
                 {
-                    books.map((book) => {
+                    books.map((book) => {                                            
                         return (<li key={book.isbn}>
                                     <BookListItem book = { book } />
                                 </li>)
@@ -22,4 +23,9 @@ class BookList extends React.Component {
     }
 }
 
-export default BookList;
+const mapStateToProps = ({ books }) => {
+    return { books }
+}
+
+//подключение connect HOC из redux к BookList каие данные буду получать из redux-store
+export default connect(mapStateToProps)(BookList);

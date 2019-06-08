@@ -187,7 +187,7 @@
   },
   {
     "title": "Distributed Application Development with PowerBuilder 6.0",
-    "isbn": "1884777686",
+    "isbn": "18847776869",
     "pageCount": 504,
     "publishedDate": { "$date": "1998-06-01T00:00:00.000-0700" },
     "longDescription": "Distributed Application Development with PowerBuilder 6.0 is a vital source for the PowerBuilder programmer; it provides the sort of detailed coverage of Distributed PowerBuilder that you can find nowwhere else.    The book opens with a discussion of distributed computing in general, as well as its design principles and technologies. Then Distributed PowerBuilder is examined in detail. By building a simple application step by step, the author discusses all of the concepts and components needed for building a PowerBuilder application and shows how to make the application available over a network.    Finally, the author explores how PowerBuilder can be used in distributed solutions both with and without using DPB.    Distributed Application Development with PowerBuilder 6.0 is for any PowerBuilder developer looking for information on distributed computing options with the PowerBuilder environment. IS managers, system architects, and developers using many different technologies can learn how PowerBuilder can be used as all or part of the solution for building distributed applications.    The main topic of this book is Distributed PowerBuilder (DPB). It covers the basics of building a DPB application and walks through each new feature with examples including the Shared object, DataWindow synchronization, Server Push and Web.PB. It also explains distributed computing technologies and design principles so that your application can be built to handle the stresses of a distributed environment.  ",
@@ -237,15 +237,6 @@
     "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bauer.jpg",
     "shortDescription": "\"2005 Best Java Book!\" -- Java Developer's Journal",
     "longDescription": "Hibernate practically exploded on the Java scene. Why is this open-source tool so popular  Because it automates a tedious task: persisting your Java objects to a relational database. The inevitable mismatch between your object-oriented code and the relational database requires you to write code that maps one to the other. This code is often complex, tedious and costly to develop. Hibernate does the mapping for you.    Not only that, Hibernate makes it easy. Positioned as a layer between your application and your database, Hibernate takes care of loading and saving of objects. Hibernate applications are cheaper, more portable, and more resilient to change. And they perform better than anything you are likely to develop yourself.    Hibernate in Action carefully explains the concepts you need, then gets you going. It builds on a single example to show you how to use Hibernate in practice, how to deal with concurrency and transactions, how to efficiently retrieve objects and use caching.    The authors created Hibernate and they field questions from the Hibernate community every day - they know how to make Hibernate sing. Knowledge and insight seep out of every pore of this book.",
-    "status": "PUBLISH",
-    "authors": ["Christian Bauer", "Gavin King"],
-    "categories": ["Java"]
-  },
-  {
-    "title": "Hibernate in Action (Chinese Edition)",
-    "pageCount": 400,
-    "publishedDate": { "$date": "1999-06-01T00:00:00.000-0700" },
-    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/bauer-cn.jpg",
     "status": "PUBLISH",
     "authors": ["Christian Bauer", "Gavin King"],
     "categories": ["Java"]
@@ -1128,23 +1119,6 @@
     "categories": ["Microsoft/.NET"]
   },
   {
-    "title": "Portlets and Apache Portals",
-    "pageCount": 500,
-    "publishedDate": { "$date": "2005-10-01T00:00:00.000-0700" },
-    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hepper.jpg",
-    "shortDescription": "Portlets and Apache Portals was not published by Manning, but the manuscript is available for download from our website \"as is.\"",
-    "longDescription": "Due to the growing complexity of web sites, portals and portlets are experiencing serious growth. Portals help reduce complexity by allowing the dynamic aggregation and display of diverse content in a single web page. Portal components are pluggable parts called portlets. To be \"pluggable\" portlets and portals must satisfy standards. The authors of this book, all but one employees of IBM, created these standards: Java Portlet Specification JSR 168 and Web Services for Remote Portlets (WSRP).    The book starts gently with the basics of portlet technology and a functionrich portlet example. It then dives more deeply into portlets and J2EE, portlet architecture, best practices, and explores how the popular JSF web framework can ease portlet development. It shows how to set up an open source portal and create portlets that dynamically access backend data of various types. It is rich in something readers want: code examples that show them how to do it.",
-    "status": "PUBLISH",
-    "authors": [
-      "Stefan Hepper",
-      "Peter Fischer",
-      "Stephan Hesmer",
-      "Richard Jacob",
-      "David Sean Taylor"
-    ],
-    "categories": ["Java"]
-  },
-  {
     "title": "Code Generation in Action",
     "isbn": "1930110979",
     "pageCount": 350,
@@ -1321,15 +1295,7 @@
     "authors": ["Robert I. Kabacoff"],
     "categories": ["Software Engineering"]
   },
-  {
-    "title": "Android in Practice",
-    "isbn": "9781935182924",
-    "pageCount": 0,
-    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/kaeppler.jpg",
-    "status": "MEAP",
-    "authors": ["Matthias Kaeppler", "Michael D. Galpin", "Charlie Collins"],
-    "categories": ["Mobile Technology"]
-  },
+  
   {
     "title": "SOA Security",
     "isbn": "1932394680",
@@ -2082,7 +2048,7 @@
   },
   {
     "title": "SQL Server MVP Deep Dives",
-    "isbn": "9781935182047",
+    "isbn": "97819351820470",
     "pageCount": 848,
     "publishedDate": { "$date": "2009-11-15T00:00:00.000-0800" },
     "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/nielsenaw.jpg",
@@ -2091,24 +2057,6 @@
     "status": "PUBLISH",
     "authors": [
       "Contributions from 53 SQL Server MVPs; Edited by Paul Nielsen",
-      "Kalen Delaney",
-      "Greg Low",
-      "Adam Machanic",
-      "Paul S. Randal",
-      "",
-      "Kimberly L. Tripp"
-    ],
-    "categories": ["Microsoft .NET"]
-  },
-  {
-    "title": "SQL Server MVP Deep Dives",
-    "isbn": "9781935182047",
-    "pageCount": 848,
-    "publishedDate": { "$date": "2009-11-01T00:00:00.000-0700" },
-    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/nielsonaw.jpg",
-    "status": "PUBLISH",
-    "authors": [
-      "Paul Nielsen",
       "Kalen Delaney",
       "Greg Low",
       "Adam Machanic",
@@ -3766,7 +3714,7 @@
   },
   {
     "title": "Jaguar Development with PowerBuilder 7",
-    "isbn": "1884777864",
+    "isbn": "18847778641",
     "pageCount": 0,
     "publishedDate": { "$date": "1999-08-09T00:00:00.000-0700" },
     "status": "PUBLISH",
