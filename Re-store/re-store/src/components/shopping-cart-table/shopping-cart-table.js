@@ -1,14 +1,18 @@
 import React from 'react';
 import './shopping-cart-table.css';
 import { connect } from 'react-redux';
+import { bookAddedToCart, bookRemoveFromCart, allBookRemoveFromCart } from '../../actions'
 
-const ShoppingCartTable = ( {items, total, onIncrease, onDecrease, onDelete} ) => {
+const ShoppingCartTable = ( props ) => {
+
+    const {items, total, onIncrease, onDecrease, onDelete} = props;
+
     const renderRow = items.map((item, idx) => {
-        const {id, name, count, total} = item;
+        const {id, title, count, total} = item;
         return (
             <tr key={id}>
-                <td>{idx}</td>
-                <td>{name}</td>
+                <td>{idx + 1}</td>
+                <td>{title}</td>
                 <td>{count}</td>
                 <td>{total}</td>
                 <td>
@@ -55,27 +59,23 @@ const ShoppingCartTable = ( {items, total, onIncrease, onDecrease, onDelete} ) =
     )
 };
 
-const mapStateToProps = ({ cartItems, orderTotal }) => {
+const mapStateToProps = (state) => {
+    let {
+        cartItems: items,
+        orderTotal: total
+    } = state.store;
     return {
-        items: cartItems,
-        total: orderTotal
-    }
+        items,
+        total
+    };
 };
 
-const mapDispatchToProps = () => {
-    return {
-        onIncrease: (id) => {
-            console.log(`Increase ${id}`);
-        },
+const mapDispatchToProps = {
+        onIncrease: bookAddedToCart,
 
-        onDecrease: (id) => {
-            console.log(`Decrease ${id}`);
-        },
+        onDecrease: bookRemoveFromCart,
 
-        onDelete: (id) => {
-            console.log(`Delete ${id}`);
-        }
-    };
+        onDelete: allBookRemoveFromCart
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable);

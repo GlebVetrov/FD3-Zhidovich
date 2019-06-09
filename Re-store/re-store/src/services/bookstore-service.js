@@ -6,7 +6,7 @@ export default class BookstoreService {
         {
             "title": "GWT in Action",
             "price": 100,
-            "isbn": "1933988231",
+            "id": "1933988231",
             "pageCount": 632,
             "publishedDate": { "$date": "2007-06-01T00:00:00.000-0700" },
             "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/hanson.jpg",
@@ -17,7 +17,7 @@ export default class BookstoreService {
         },
         {
             "title": "The Quick Python Book",
-            "isbn": "1884777740",
+            "id": "1884777740",
             "price": 100,
             "pageCount": 444,
             "publishedDate": { "$date": "1999-10-01T00:00:00.000-0700" },
@@ -32,7 +32,7 @@ export default class BookstoreService {
     getBooks () {
         return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    if (Math.random() > 0.75) {
+                    if (false) {
                         reject(new Error('Something happened'))
                     };
                     resolve(this.data);
