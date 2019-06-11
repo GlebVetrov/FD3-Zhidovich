@@ -67,7 +67,7 @@ export default new Config().merge({
   plugins: [
     new ExtractTextPlugin("[name].bundle.[hash].css"),
     new HtmlWebpackPlugin({
-      template: './index.html',
+      template: './snow.html',
       inject: "body"
     })]
 });

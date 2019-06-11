@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #field {
+            margin-bottom: 5px;
+        }
+
+        #field input{
+            margin-right: 5px;
+        }
+
+        .film-rating{
+            width: 400px;
+            padding: 5px;
+            border: 1px solid black;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        div.star {
+            display: inline-block;
+            background-image: url('img/star2.gif');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 20px;
+            height: 20px;
+
+        }
+
+        div.star:hover,
+        div.star:hover ~ div.star
+        {
+            background-image: url('img/star2.gif');
+
+        }
+
+        .rating {
+            display: inline-block;
+            float: right;
+        }
+
+        .rating .red {
+            background-image: url('img/redstar.gif');
+        }
+        .rating:hover .star {
+            background-image: url('img/redstar.gif');
+        }
+    </style>
+</head>
+<body>
+    <div id="field"></div>
+    <div id="main"></div>
+    <script src="index.js"></script>
+</body>
+</html>
