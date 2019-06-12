@@ -40,11 +40,10 @@ let arr = [['The Godfather (1972)', 0],
 
 function filmsRating () {
     arr.sort((a, b) => {
+        if (b[1] !== a[1]){
+            return b[1] - a[1];
+        }
         return a[0].localeCompare(b[0]);
-    });
-
-    arr.sort((a, b) => {
-        return b[1] - a[1];
     });
 
     arr.forEach((elem) => {
