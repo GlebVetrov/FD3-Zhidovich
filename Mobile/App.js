@@ -9,7 +9,6 @@ import clients from './clients';
 ReactDOM.render(  
     <Fragment>
         <MobileCompany clients={clients}/>
-        <MobileCompany clients={clients}/>        
     </Fragment>  
     
     , document.getElementById('container')

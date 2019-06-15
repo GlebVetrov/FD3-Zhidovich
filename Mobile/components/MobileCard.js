@@ -19,7 +19,7 @@ export default class MobileCard extends PureComponent {
             patronymic: PropTypes.string.isRequired,
             balance: PropTypes.number.isRequired,
           }),
-    }
+    };
     
     state = {
         clientData: this.props.client,
@@ -29,16 +29,16 @@ export default class MobileCard extends PureComponent {
         statusValidSurname: false,
         statusValidPatronymic: false,
         statusValidBalance: false,
-    }
+    };
 
     saveClient = () => {
         let data = this.state.clientData;
-        eventEvents.emit('ESaveClient', data);
-    }
+        this.props.events.emit('ESaveClient', data);
+    };
 
     cancel = () => {        
         eventEvents.emit('ECancel');
-    }
+    };
 
     // changeProduct = (EO) => {
     //     if (EO.target.name === 'name') {
@@ -95,7 +95,7 @@ export default class MobileCard extends PureComponent {
         // Установим фокус на текстовое поле с помощью чистого DOM API
         // Примечание: обращаемся к "current", чтобы получить DOM-узел
         this.nameRef.current.focus();
-      }
+      };
 
     setNewText = () => {
         let newText= {...this.state.clientData};
@@ -152,7 +152,7 @@ export default class MobileCard extends PureComponent {
         ) {         
           this.setState({clientData: newText}, this.saveClient);
         }
-      
+
       return;
     };
 
@@ -185,7 +185,7 @@ export default class MobileCard extends PureComponent {
                 balance<br/> <input type="text" name = 'balance' defaultValue={this.state.clientData.balance} ref={this.balanceRef}/>
                 </label><br/>
             <span>{this.state.statusValidBalance && 'Please, fill the field'}</span></p>
-                <p><input type="button" value="Save" disabled = {this.state.saveButton} onClick = {this.setNewText}/>
+                <p><input type="button" value="Save" disabled = {this.state.saveButton} onClick = {this.setNewText} />
                 <input type="button" value="Cancel" onClick = { ()=>this.props.events.emit('ECancel') }/></p>
             </div>            
         )

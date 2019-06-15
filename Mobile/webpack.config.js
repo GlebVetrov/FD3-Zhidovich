@@ -19,8 +19,8 @@ module.exports = {
     },
     plugins: [
         new HTMLPlugin({
-            filename: 'snow.html.html',
-            template: './snow.html'
+            filename: 'index.html',
+            template: './index.html'
         }),
         new MiniCssExtractPlugin({
             filename: 'bundle.css'

@@ -10,7 +10,7 @@ import {EventEmitter} from 'events';
 
 export default class MobileCompany extends PureComponent {
     constructor(props) {
-        super(props)
+        super(props);
         this.eventEvents = new EventEmitter();
     }
 
@@ -23,8 +23,7 @@ export default class MobileCompany extends PureComponent {
               balance: PropTypes.number.isRequired,
             })
           ),
-    }
-
+    };
     
 
     state = {
@@ -34,34 +33,34 @@ export default class MobileCompany extends PureComponent {
         editClients: null,
         editNumber: null,
         freeCode: [this.props.clients.length + 1]
-    }
+    };
 
     
 
     setVelcom = () => {
         let velcom = 1;
         this.setState({status: velcom})
-    }
+    };
 
     setMtc = () => {
         let mtc = 2;
-        this.setState({status: mtc})
-    }
+        this.setState({status: mtc});
+    };
 
     showAll = () => {
         let show = 1;
-        this.setState({showData: show})
-    }
+        this.setState({showData: show});
+    };
 
     showActive = () => {
         let show = 2;
         this.setState({showData: show})
-    }
+    };
 
     showBlocked = () => {
         let show = 3;
         this.setState({showData: show})
-    }
+    };
 
     deleteClient = (code) => {
         let freeCode = this.state.freeCode.slice();
@@ -73,41 +72,42 @@ export default class MobileCompany extends PureComponent {
         freeCode.push(code);
         
         this.setState({dataClients: clients, freeCode: freeCode})
-    }
+    };
 
     editClient = (code) => {
         this.setState({editClients: 1, editNumber: code})
-    }
+    };
 
     addClient = () => {
         let num = Math.min(...this.state.freeCode);
         this.setState({editClients: 2, editNumber: num})
-    }
+    };
 
     cancel = () => {
         this.setState({editClients: null, editNumber: null})
-    }
+    };
 
     saveClient = (client) => {
-        
+        console.log(client);
         let clients = this.state.dataClients.slice();
         let status = this.state.editClients;     
         
         if (status === 1){
         clients = clients.map((v) => {
+            console.log(v.code);
             if(v.code === client.code){  
-                let newClient = {...client}              
+                let newClient = {...client};
                 return newClient;
             }
             return v;
         });
-        } 
+        }
         
         if (status === 2) {
             let arr = [...this.state.freeCode];
             if (arr.length === 1) {
                 let inc = arr[0] + 1;
-                arr = [inc]
+                arr = [inc];
                 this.setState({freeCode: arr});
             }
             if (arr.length !== 1) {
@@ -117,10 +117,10 @@ export default class MobileCompany extends PureComponent {
             clients.push(client);
         }
         
-        
+        console.log(clients);
 
         this.setState({dataClients: clients, editClients: null, editNumber: null});
-    }
+    };
     
     componentDidMount = () => {
         
@@ -139,7 +139,7 @@ export default class MobileCompany extends PureComponent {
 
     render() {
 
-        console.log('render: MobileCompany')
+        console.log('render: MobileCompany');
         
         let showData = this.state.showData;
         
@@ -160,7 +160,7 @@ export default class MobileCompany extends PureComponent {
         .map((v) => {
             return <MobileClient events = {this.eventEvents} key={v.code} client={v}/>
         })
-        }
+        };
         let sortMemoizeed=memoize(sort);        
         
         let client = this.state.editClients;
@@ -186,7 +186,7 @@ export default class MobileCompany extends PureComponent {
                     "balance": 0
                 };
             }
-        }
+        };
 
         let editClientMemoizeed = memoize(editClient);
                 
