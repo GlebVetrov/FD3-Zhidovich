@@ -8,11 +8,17 @@ import './book-list.css';
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 
-const BookList = ({ books, onAddedToCart }) => {
+const BookList = ({ books, str, onAddedToCart }) => {
+    console.log(str);
     return (
         <ul className='book-list'>
             {
-                books.map((book ) => {
+                books.filter((book) => {
+                    if (book.title.toLowerCase().indexOf(str.toLowerCase()) !== -1) {
+                        return true;
+                    }
+                    return false;
+                }).map((book ) => {
                     return (<li key={book.id}>
                                 <BookListItem
                                     book = { book }
@@ -34,7 +40,7 @@ class BookListContainer extends React.Component {
     }
     
     render() {
-        const { books, loading, error, onAddedToCart } = this.props;
+        const { books, loading, error, search, onAddedToCart } = this.props;
         console.log(books);
         if (loading) {
            return <Spinner/>;
@@ -44,13 +50,13 @@ class BookListContainer extends React.Component {
             return <ErrorIndicator/>
         }
 
-        return <BookList books={ books } onAddedToCart={ onAddedToCart }/>;
+        return <BookList str= {search} books={ books } onAddedToCart={ onAddedToCart }/>;
     }
 }
 
 const mapStateToProps = (state) => {    
-    let { books, loading, error } = state.store.bookList;
-    return { books, loading, error };
+    let { books, loading, error, search } = state.store.bookList;
+    return { books, loading, error, search };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -63,5 +69,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 };
 
-//подключение connect HOC из redux к BookList каие данные буду получать из redux-store
 export default withBookstoreService()(connect(mapStateToProps, mapDispatchToProps)(BookListContainer));

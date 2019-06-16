@@ -72,9 +72,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
         onIncrease: bookAddedToCart,
-
         onDecrease: bookRemoveFromCart,
-
         onDelete: allBookRemoveFromCart
 };
 

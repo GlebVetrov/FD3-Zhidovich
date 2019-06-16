@@ -42,6 +42,13 @@ const bookRemoveFromCart = (bookId) => {
     }
 };
 
+const bookSearch = (str) => {
+    return {
+        type: 'FETCH_BOOKS_SEARCH',
+        payload: str
+    }
+}
+
 const allBookRemoveFromCart = (bookId) => {
     return {
         type: 'ALL_BOOK_REMOVE_FROM_CART',
@@ -54,5 +61,6 @@ export {
     fetchBooks,
     bookAddedToCart,
     bookRemoveFromCart,
-    allBookRemoveFromCart
+    allBookRemoveFromCart,
+    bookSearch
 };
