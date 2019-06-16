@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+    <style>
+       * {
+            margin: 0;
+            padding: 0;
+        }
+
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }   
+        .timeline {
+            width: 800px;
+            border: 20px solid purple;
+            font-weight: bold;
+            font-size: 18px;
+            color: white;
+            background-color: purple;
+         }
+        .container {
+            display: flex;
+        }
+
+        .container div{            
+            padding-right: 20px; 
+            padding-left: 20px;
+            padding-bottom: 40px;
+            line-height: 1.4;
+        }
+        
+        .left-side {
+            flex-basis: 10px; 
+            flex-grow: 1;
+            position: relative;
+            padding-right: -25px;
+            border: 0;
+        } 
+
+        .left-side::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -13px;
+            display: block;
+            width: 25px;
+            height: 25px;
+            border: 2px solid #999;
+            border-radius: 50%;
+            background: purple;
+            z-index: 1;
+        }
+        
+        .wait::after {
+            border: 2px dashed #999;
+        }
+
+        .container .right-side {
+            flex-basis: 10px; 
+            flex-grow: 1;
+            position: relative;
+            border-left: 2px solid #999;
+            padding-left: 70px;
+        }
+        
+        .right-side.wait {
+            border-left: 2px dashed #999;
+        }
+
+        .load span:last-child {
+            color: rgb(245, 241, 4);
+        }
+
+        .load::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: -8px;
+            display: block;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: rgb(245, 241, 4);
+            z-index: 2;
+        }
+
+        .right-side span:first-of-type, .left-side span:first-of-type {
+            margin-right: 10px;
+        }
+
+        .wait {
+            color: #999;
+        }
+
+        .right-side.last {
+            border: 0;
+        }
+        @media screen and (max-width: 800px) {
+            .timeline {
+                width: 400px;
+                font-size: 16px;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+            
+            .container .right-side, .container .left-side {                
+                border-left: none;
+                border-right: 2px solid #999;
+                padding-left: 15px;
+            }
+            .load::before {
+               top: 10; 
+               left: 352px;
+            }
+            
+
+            .right-side::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -13px;
+                display: block;
+                width: 25px;
+                height: 25px;
+                border: 2px solid #999;
+                border-radius: 50%;
+                background: purple;
+                z-index: 1;
+            }
+
+            .right-side.wait,  .left-side.wait{
+                border-right: 2px dashed;
+            }
+
+            .right-side.last {
+                border: 0;
+            }
+            .wait::after {
+                border: 2px dashed;
+            }
+            .load.wait::after {
+                border: 2px solid;
+            }
+        }        
+    </style>
+</head>
+<body>
+    <div class='timeline'>
+        <div class='container'>
+            <div class="left-side">
+                <span class="fa fa-check"></span><span>Rich influencer database</span>
+            </div>
+            <div class="right-side">
+                    <span class="fa fa-check"></span><span>Advanced search and filtering</span>   
+            </div>
+        </div>
+        <div class='container'>
+                <div class="left-side">
+                    <span class="fa fa-check"></span><span>Deep audience analytics</span>
+                </div>
+                <div class="right-side">
+                        <span class="fa fa-check"></span><span>Influencer management</span>   
+                </div>
+        </div>
+        <div class='container'>
+                <div class="left-side">
+                    <span class="fa fa-check"></span><span>Campaign monitoring</span>
+                </div>
+                <div class="right-side load  wait">
+                        <span class="fa fa-refresh fa-spin"></span><span>Campaign management</span>   
+                </div>
+        </div>
+        <div class='container'>
+                <div class="left-side wait">
+                    <span class="fa fa-clock-o"></span><span>Communication tools</span>
+                </div>
+                <div class="right-side wait">
+                        <span class="fa fa-clock-o"></span><span>Transparent payments</span>   
+                </div>
+        </div>
+        <div class='container'>
+                <div class="left-side wait">
+                    <span class="fa fa-clock-o"></span><span>Rich influencer database</span>
+                </div>
+                <div class="right-side wait last">
+                        <span class="fa fa-clock-o"></span><span>Advanced search and filtering</span>   
+                </div>
+        </div>
+    </div>
+</body>
+</html>

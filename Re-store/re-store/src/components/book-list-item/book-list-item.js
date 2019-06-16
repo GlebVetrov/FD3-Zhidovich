@@ -1,5 +1,6 @@
 import React from 'react';
 import './book-list-item.css';
+import { Button } from 'react-bootstrap';
 
 const BookListItem = ({ book, onAddedToCart }) => {
     const { title, authors, price, thumbnailUrl } = book;
@@ -12,8 +13,7 @@ const BookListItem = ({ book, onAddedToCart }) => {
                 <span className='book-title'>{title}</span>
                 <div className='book-author'>{authors}</div>
                 <div className='book-price'>{price}</div>
-                <button onClick={onAddedToCart}
-                    className='btn btn-info add-to-cart'>Add to cart</button>
+                <Button onClick={onAddedToCart} variant="info">Add to cart</Button>
             </div>
         </div>
     )
