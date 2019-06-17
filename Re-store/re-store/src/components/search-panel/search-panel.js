@@ -27,7 +27,7 @@ class SearchPanel extends React.Component {
         return (
             <div>
                 <input type='text' ref={this.inputRef}/>
-                <Button variant="dark" size="sm" onClick={this.search}>Поиск</Button>
+                <Button variant="dark" onClick={this.search}>Search</Button>
                 <hr></hr>
             </div>
         )

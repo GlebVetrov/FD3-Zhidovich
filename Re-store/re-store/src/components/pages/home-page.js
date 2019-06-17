@@ -5,7 +5,7 @@ import SearchPanel from '../search-panel'
 const HomePage = () => {
     return ( 
         <div>
-            <SearchPanel></SearchPanel>
+            <SearchPanel/>
             <BookList />
         </div>       
         

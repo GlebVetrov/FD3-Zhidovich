@@ -1,3 +1,7 @@
 .book-list {
     list-style: none;
 }
+
+.book-select {
+    background-color: aqua;
+}

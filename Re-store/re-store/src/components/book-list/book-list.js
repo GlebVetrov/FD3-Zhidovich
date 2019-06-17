@@ -8,8 +8,10 @@ import './book-list.css';
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 
-const BookList = ({ books, str, onAddedToCart }) => {
-    console.log(str);
+const BookList = ({ books, str, onAddedToCart, items }) => {
+
+    books = books.slice(0, 51);
+    
     return (
         <ul className='book-list'>
             {
@@ -18,15 +20,36 @@ const BookList = ({ books, str, onAddedToCart }) => {
                         return true;
                     }
                     return false;
-                }).map((book ) => {
-                    return (<li key={book.id}>
+                }).map(( book ) => {
+                    
+                    if (items.length !== 0){
+                        
+                    for (let i = 0; i < items.length; i++) {
+                        console.log(items.length);
+                        if (items[i].id === book.id) {
+                            console.log(items[i].id === book.id);
+                            return (<li key={book.id}>
                                 <BookListItem
+                                    select = { true }
                                     book = { book }
                                     onAddedToCart={()=>{
                                        return onAddedToCart(book.id)}
                                     }
                                 />
                             </li>)
+                        }
+                    }
+                    }
+                    return (<li key={book.id}>
+                                <BookListItem
+                                    select = { false }
+                                    book = { book }
+                                    onAddedToCart={()=>{
+                                       return onAddedToCart(book.id)}
+                                    }
+                                />
+                            </li>)
+                        
                 })
             }
         </ul>
@@ -40,8 +63,8 @@ class BookListContainer extends React.Component {
     }
     
     render() {
-        const { books, loading, error, search, onAddedToCart } = this.props;
-        console.log(books);
+        const { books, loading, error, search, cartItems, onAddedToCart } = this.props;
+        
         if (loading) {
            return <Spinner/>;
         }
@@ -50,13 +73,14 @@ class BookListContainer extends React.Component {
             return <ErrorIndicator/>
         }
 
-        return <BookList str= {search} books={ books } onAddedToCart={ onAddedToCart }/>;
+        return <BookList items = { cartItems } str= { search } books={ books } onAddedToCart={ onAddedToCart }/>;
     }
 }
 
 const mapStateToProps = (state) => {    
     let { books, loading, error, search } = state.store.bookList;
-    return { books, loading, error, search };
+    let { cartItems } = state.store.shoppingCart;
+    return { books, loading, error, search, cartItems };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {

@@ -6,8 +6,7 @@ const updateBookList = (state, action) => {
             loading: true,
             error: null
         }
-    } 
-    console.log(state.bookList);
+    }     
     switch (action.type) {
         case 'FETCH_BOOKS_REQUEST':
             return {
