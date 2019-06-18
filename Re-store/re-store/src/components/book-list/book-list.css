@@ -5,3 +5,20 @@
 .book-select {
     background-color: aqua;
 }
+
+ul {
+    list-style: none;
+    text-align: center;
+}
+
+ul li {
+    font-size: 20px;
+    display: inline;
+    margin-right: 20px;
+}
+
+.ActivePageLink {
+    color: black;
+    font-weight: bold;
+    text-decoration: underline;
+}

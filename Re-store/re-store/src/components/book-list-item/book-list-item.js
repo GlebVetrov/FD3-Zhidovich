@@ -15,14 +15,14 @@ class BookListItem extends React.Component {
       };
 
     componentWillReceiveProps = (newProps) => {
-        console.log("MobileClient id="+newProps.book.id+" componentWillReceiveProps");
+        // console.log("MobileClient id="+newProps.book.id+" componentWillReceiveProps");
       };
 
     render() {
         const { select, book, onAddedToCart } = this.state.bookData;
         const { title, authors, price, thumbnailUrl } = book;
 
-        console.log('render: Book id=' + book.id);
+        // console.log('render: Book id=' + book.id);
 
         return (
             <div  className={ select ? 'book-list-item book-select' :  'book-list-item'} >

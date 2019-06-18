@@ -2,11 +2,12 @@ import React from 'react';
 import BookList from '../book-list'
 import SearchPanel from '../search-panel'
 
-const HomePage = () => {
+const HomePage = (props) => {
+    
     return ( 
         <div>
             <SearchPanel/>
-            <BookList />
+            <BookList pageNum = { props.match.params.clid } />
         </div>       
         
     )

@@ -1,6 +1,7 @@
 import React from 'react';
 import BookListItem from '../book-list-item';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import { fetchBooks, bookAddedToCart } from '../../actions';
 import { withBookstoreService } from '../hoc';
@@ -8,10 +9,28 @@ import './book-list.css';
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 
-const BookList = ({ books, str, onAddedToCart, items }) => {
-
-    books = books.slice(0, 51);
+const BookList = ({ books, str, onAddedToCart, items, pageNum }) => {
     
+    books = books.slice(0, 50);
+    console.log(pageNum);
+    pageNum = parseInt(pageNum);
+
+    if (pageNum === 1) {
+        books = books.slice(0, 10);
+    }
+    if (pageNum === 2) {
+        books = books.slice(10, 20);
+    }
+    if (pageNum === 3) {
+        books = books.slice(20, 30);
+    }
+    if (pageNum === 4) {
+        books = books.slice(30, 40);
+    }
+    if (pageNum === 5) {
+        books = books.slice(40, 50);
+    }
+
     return (
         <ul className='book-list'>
             {
@@ -57,13 +76,17 @@ const BookList = ({ books, str, onAddedToCart, items }) => {
 };
 
 class BookListContainer extends React.Component {
+
+    state = {
+        
+    }
     
     componentDidMount() {
         this.props.fetchBooks();
     }
-    
+
     render() {
-        const { books, loading, error, search, cartItems, onAddedToCart } = this.props;
+        const { books, loading, error, search, cartItems, onAddedToCart, pageNum } = this.props;
         
         if (loading) {
            return <Spinner/>;
@@ -73,14 +96,27 @@ class BookListContainer extends React.Component {
             return <ErrorIndicator/>
         }
 
-        return <BookList items = { cartItems } str= { search } books={ books } onAddedToCart={ onAddedToCart }/>;
+        return (<React.Fragment>
+                    <ul>
+                        <li><NavLink to="/1" className="PageLink" activeClassName="ActivePageLink">1-10</NavLink></li>
+                        <li><NavLink to="/2" className="PageLink" activeClassName="ActivePageLink">10-20</NavLink></li>
+                        <li><NavLink to="/3" className="PageLink" activeClassName="ActivePageLink">20-30</NavLink></li>
+                        <li><NavLink to="/4" className="PageLink" activeClassName="ActivePageLink">30-40</NavLink></li>
+                        <li><NavLink to="/5" className="PageLink" activeClassName="ActivePageLink">40-50</NavLink></li>
+                        <li><NavLink to="/" exact className="PageLink" activeClassName="ActivePageLink">All</NavLink></li>
+                    </ul>
+                    <hr/>
+                    <BookList pageNum = { pageNum } items = { cartItems } str= { search } books={ books } onAddedToCart={ onAddedToCart }/>
+                </React.Fragment>)
     }
 }
 
-const mapStateToProps = (state) => {    
+const mapStateToProps = (state, ownProps) => {
+    
+    let { pageNum } = ownProps;
     let { books, loading, error, search } = state.store.bookList;
     let { cartItems } = state.store.shoppingCart;
-    return { books, loading, error, search, cartItems };
+    return { books, loading, error, search, cartItems, pageNum };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {

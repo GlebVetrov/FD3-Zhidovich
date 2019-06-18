@@ -19,6 +19,7 @@ const App = ({orderTotal, cartItems}) => {
             <Switch>
                 <Route path='/' exact component={HomePage}/>
                 <Route path='/cart' component={CardPage}/>
+                <Route path="/:clid" component={HomePage}/>
             </Switch>
         </main>
     )
