@@ -8,3 +8,28 @@
     margin-left: 5px;
     margin-top: 5px;
 }
+
+.shopping-cart-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.shopping-cart-list div{ 
+    flex-basis: 10px;    
+    flex-shrink: 1;
+    flex-grow: 1;
+
+}
+
+.item-exit {
+    opacity: 1;
+  }
+
+.item-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+  }
+  

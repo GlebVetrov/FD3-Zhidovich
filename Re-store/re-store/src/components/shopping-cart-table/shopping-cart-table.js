@@ -1,7 +1,9 @@
 import React from 'react';
 import './shopping-cart-table.css';
 import { connect } from 'react-redux';
-import { bookAddedToCart, bookRemoveFromCart, allBookRemoveFromCart } from '../../actions'
+import { bookAddedToCart, bookRemoveFromCart, allBookRemoveFromCart } from '../../actions';
+import { CSSTransition, TransitionGroup, } from 'react-transition-group';
+import { Container, ListGroup } from 'react-bootstrap';
 
 const ShoppingCartTable = ( props ) => {
 
@@ -10,51 +12,58 @@ const ShoppingCartTable = ( props ) => {
     const renderRow = items.map((item, idx) => {
         const {id, title, count, total} = item;
         return (
-            <tr key={id}>
-                <td>{idx + 1}</td>
-                <td>{title}</td>
-                <td>{count}</td>
-                <td>{total}</td>
-                <td>
-                    <button onClick={() => onDelete(id)}
-                            className='btn btn-outline-danger btn-sm'>
-                        <i className='fa fa-trash-o'/>
-                    </button>
-                    <button onClick={() => onIncrease(id)}
-                            className='btn btn-outline-success btn-sm'>
-                        <i className='fa fa-plus-circle'/>
-                    </button>
-                    <button onClick={() => onDecrease(id)}
-                            className='btn btn-outline-warning btn-sm'>
-                        <i className='fa fa-minus-circle'/>
-                    </button>
-                </td>
-            </tr>
+            <CSSTransition key={id} timeout={500} classNames="item" >
+            
+                <ListGroup.Item className='shopping-cart-list'>
+                    <div>{idx + 1}</div>
+                    <div>{title}</div>
+                    <div>{count}</div>
+                    <div>{total}</div>
+                    <div>
+                        <button onClick={() => onDelete(id)}
+                                className='btn btn-outline-danger btn-sm'>
+                            <i className='fa fa-trash-o'/>
+                        </button>
+                        <button onClick={() => onIncrease(id)}
+                                className='btn btn-outline-success btn-sm'>
+                            <i className='fa fa-plus-circle'/>
+                        </button>
+                        <button onClick={() => onDecrease(id)}
+                                className='btn btn-outline-warning btn-sm'>
+                            <i className='fa fa-minus-circle'/>
+                        </button>
+                    </div>
+                </ListGroup.Item>
+            
+            </CSSTransition>
         )
     });
 
     return (
-        <div className='shopping-cart-table'>
+        <div className='shopping-cart-table'>        
             <h2>Your Order</h2>
-            <table className='table'>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Item</th>
-                        <th>Count</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        renderRow
-                    }
-                </tbody>
-            </table>
+            <div> 
+            <Container>               
+                <ListGroup>
+                    <TransitionGroup>
+                        <ListGroup.Item className='shopping-cart-list'>
+                            <div>#</div>
+                            <div>Item</div>
+                            <div>Count</div>
+                            <div>Price</div>
+                            <div>Action</div>
+                        </ListGroup.Item>            
+                    
+                        {
+                            renderRow
+                        }
+                    </TransitionGroup>
+                </ListGroup>
+            </Container>
+            </div>
             <div className='total'>
                 Total: ${total}
-            </div>
+            </div>        
         </div>
     )
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import BookListItem from '../book-list-item';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { Container, ListGroup } from 'react-bootstrap';
 
 import { fetchBooks, bookAddedToCart } from '../../actions';
 import { withBookstoreService } from '../hoc';
@@ -32,7 +33,7 @@ const BookList = ({ books, str, onAddedToCart, items, pageNum }) => {
     }
 
     return (
-        <ul className='book-list'>
+        <ListGroup className='book-list'>
             {
                 books.filter((book) => {
                     if (book.title.toLowerCase().indexOf(str.toLowerCase()) !== -1) {
@@ -71,7 +72,7 @@ const BookList = ({ books, str, onAddedToCart, items, pageNum }) => {
                         
                 })
             }
-        </ul>
+        </ListGroup>
     )
 };
 
@@ -106,7 +107,9 @@ class BookListContainer extends React.Component {
                         <li><NavLink to="/" exact className="PageLink" activeClassName="ActivePageLink">All</NavLink></li>
                     </ul>
                     <hr/>
-                    <BookList pageNum = { pageNum } items = { cartItems } str= { search } books={ books } onAddedToCart={ onAddedToCart }/>
+                    <Container>
+                        <BookList pageNum = { pageNum } items = { cartItems } str= { search } books={ books } onAddedToCart={ onAddedToCart }/>
+                    </Container>
                 </React.Fragment>)
     }
 }

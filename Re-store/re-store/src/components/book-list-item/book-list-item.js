@@ -1,6 +1,7 @@
 import React from 'react';
 import './book-list-item.css';
 import { Button } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 
 class BookListItem extends React.Component {
 
@@ -25,7 +26,7 @@ class BookListItem extends React.Component {
         // console.log('render: Book id=' + book.id);
 
         return (
-            <div  className={ select ? 'book-list-item book-select' :  'book-list-item'} >
+            <ListGroup.Item  className={ select ? 'book-list-item book-select' :  'book-list-item'} >
                 <div className='book-cover'>
                     <img src={thumbnailUrl} alt={'cover'}/>
                 </div>
@@ -35,27 +36,10 @@ class BookListItem extends React.Component {
                     <div className='book-price'>{price}</div>
                     <Button onClick={onAddedToCart} variant="info">Add to cart</Button>
                 </div>
-            </div>
+            </ListGroup.Item>
         )
     }
 }
 
-
-// const BookListItem = ({ select, book, onAddedToCart }) => {
-//     const { title, authors, price, thumbnailUrl } = book;    
-//     return (
-//         <div  className={ select ? 'book-list-item book-select' :  'book-list-item'} >
-//             <div className='book-cover'>
-//                 <img src={thumbnailUrl} alt={'cover'}/>
-//             </div>
-//             <div className={'book-details'}>
-//                 <span className='book-title'>{title}</span>
-//                 <div className='book-author'>{authors}</div>
-//                 <div className='book-price'>{price}</div>
-//                 <Button onClick={onAddedToCart} variant="info">Add to cart</Button>
-//             </div>
-//         </div>
-//     )
-// } 
 
 export default BookListItem;
