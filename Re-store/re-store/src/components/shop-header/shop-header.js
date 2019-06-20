@@ -6,7 +6,7 @@ const ShopHeader = ({ numItems, total }) => {
     return (
         <header className='shop-header row'>
             <NavLink to='/'>
-                <div className='logo text-dark' href='#'>BooksStore</div>
+                <div className='logo text-primary' href='#'>BooksStore</div>
             </NavLink>
             <NavLink to='/cart'>
                 <div>
