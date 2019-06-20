@@ -2,14 +2,14 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import clients from '../clients';
-import MobileClients from '../components/MobileClient';
+
+import App from '../components/app/';
 
 test('работа MobileClients', () => {
 
   // создаём тестовую версию компонента
   const component = renderer.create(
-    <MobileClients  client={clients[0]}/>
+    <App/>
   );
 
   // получаем снэпшот (HTML-снимок) компонента для сверки, что вёрстка не испортилась

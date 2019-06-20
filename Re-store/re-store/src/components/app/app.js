@@ -36,7 +36,7 @@ const App = ({orderTotal, cartItems}) => {
     return (
         <main role='main' className='container'>
             <ShopHeader numItems={num} total={orderTotal}/>
-            <AnimationRoute/>
+            <Container/>
         </main>
     )
 }
