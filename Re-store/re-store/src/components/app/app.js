@@ -3,7 +3,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import { HomePage, CardPage } from '../pages/'
 import ShopHeader from '../shop-header';
 import { connect } from 'react-redux';
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 
 import './app.css';
@@ -36,7 +36,7 @@ const App = ({orderTotal, cartItems}) => {
     return (
         <main role='main' className='container'>
             <ShopHeader numItems={num} total={orderTotal}/>
-            <Container/>
+            <AnimationRoute/>
         </main>
     )
 }

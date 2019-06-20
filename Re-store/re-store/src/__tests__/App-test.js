@@ -16,22 +16,22 @@ test('работа MobileClients', () => {
   let componentTree=component.toJSON();
   expect(componentTree).toMatchSnapshot();
 
-  // найдём в вёрстке компонента саму кнопку
-  const buttonEdit = component.root.find( el => el.type=='button' && el.props.value == 'edit1' );
-  const buttonDelete = component.root.find( el => el.type=='button' && el.props.value == 'delete1' );
+  // // найдём в вёрстке компонента саму кнопку
+  // const buttonEdit = component.root.find( el => el.type=='button' && el.props.value == 'edit1' );
+  // const buttonDelete = component.root.find( el => el.type=='button' && el.props.value == 'delete1' );
       
-  // и "нажмём" на неё
-  buttonEdit.props.onClick();
+  // // и "нажмём" на неё
+  // buttonEdit.props.onClick();
 
-  // получаем уже изменённый снэпшот
-  componentTree=component.toJSON();
-  expect(componentTree).toMatchSnapshot();
+  // // получаем уже изменённый снэпшот
+  // componentTree=component.toJSON();
+  // expect(componentTree).toMatchSnapshot();
 
-  buttonDelete.props.onClick();
+  // buttonDelete.props.onClick();
 
-  // получаем уже изменённый снэпшот
-  componentTree=component.toJSON();
-  expect(componentTree).toMatchSnapshot();
+  // // получаем уже изменённый снэпшот
+  // componentTree=component.toJSON();
+  // expect(componentTree).toMatchSnapshot();
 
   /*
   // можно эмулировать события, передавая в качестве объекта события то что нам нужно:
