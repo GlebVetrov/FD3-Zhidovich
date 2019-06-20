@@ -45,7 +45,7 @@ const ShoppingCartTable = ( props ) => {
             <div> 
             <Container>               
                 <ListGroup>
-                    <TransitionGroup>
+                   
                         <ListGroup.Item className='shopping-cart-list'>
                             <div>#</div>
                             <div>Item</div>
@@ -53,7 +53,7 @@ const ShoppingCartTable = ( props ) => {
                             <div>Price</div>
                             <div>Action</div>
                         </ListGroup.Item>            
-                    
+                     <TransitionGroup>
                         {
                             renderRow
                         }

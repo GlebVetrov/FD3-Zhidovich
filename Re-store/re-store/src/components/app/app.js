@@ -1,11 +1,30 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { HomePage, CardPage } from '../pages/'
 import ShopHeader from '../shop-header';
 import { connect } from 'react-redux';
-import { CSSTransition } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
+
 
 import './app.css';
+
+const Container = ({ location }) => {
+    return (
+      <React.Fragment>
+          <TransitionGroup>
+              <CSSTransition key={location.key} timeout={{ enter: 300, exit: 300 }} classNames={'fade'}>
+                  <Switch location={location}>
+                        <Route path='/' exact component={HomePage}/>
+                        <Route path='/cart' component={CardPage}/>
+                        <Route path="/:clid" component={HomePage}/>
+                  </Switch>
+              </CSSTransition>
+        </TransitionGroup>
+      </React.Fragment>
+    );
+  }
+
+const AnimationRoute = withRouter(Container);
 
 const App = ({orderTotal, cartItems}) => {
     let num = 0;
@@ -17,11 +36,7 @@ const App = ({orderTotal, cartItems}) => {
     return (
         <main role='main' className='container'>
             <ShopHeader numItems={num} total={orderTotal}/>
-            <Switch>
-                <Route path='/' exact component={HomePage}></Route>
-                <Route path='/cart' component={CardPage}></Route>
-                <Route path="/:clid" component={HomePage}></Route>
-            </Switch>
+            <AnimationRoute/>
         </main>
     )
 }
