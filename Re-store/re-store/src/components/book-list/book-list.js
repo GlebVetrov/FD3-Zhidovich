@@ -1,79 +1,13 @@
 import React from 'react';
-import BookListItem from '../book-list-item';
 import { connect } from 'react-redux';
-import { Container, ListGroup } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import isoFetch from 'isomorphic-fetch';
+import BookList from './book-lists';
 
-import { fetchBooks, bookAddedToCart } from '../../actions';
-import { withBookstoreService } from '../hoc';
+import { bookAddedToCart, booksLoaded, booksError, booksRequested } from '../../actions';
 import './book-list.css';
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
-
-const BookList = ({ books, str, onAddedToCart, items, pageNum }) => {
-    
-    books = books.slice(0, 50);
-    console.log(pageNum);
-    pageNum = parseInt(pageNum);
-
-    if (pageNum === 1) {
-        books = books.slice(0, 10);
-    }
-    if (pageNum === 2) {
-        books = books.slice(10, 20);
-    }
-    if (pageNum === 3) {
-        books = books.slice(20, 30);
-    }
-    if (pageNum === 4) {
-        books = books.slice(30, 40);
-    }
-    if (pageNum === 5) {
-        books = books.slice(40, 50);
-    }
-
-    return (
-        <ListGroup className='book-list'>
-            {
-                books.filter((book) => {
-                    if (book.title.toLowerCase().indexOf(str.toLowerCase()) !== -1) {
-                        return true;
-                    }
-                    return false;
-                }).map(( book ) => {
-                    
-                    if (items.length !== 0){
-                        
-                    for (let i = 0; i < items.length; i++) {
-                        console.log(items.length);
-                        if (items[i].id === book.id) {
-                            console.log(items[i].id === book.id);
-                            return (<li key={book.id}>
-                                <BookListItem
-                                    select = { true }
-                                    book = { book }
-                                    onAddedToCart={()=>{
-                                       return onAddedToCart(book.id)}
-                                    }
-                                />
-                            </li>)
-                        }
-                    }
-                    }
-                    return (<li key={book.id}>
-                                <BookListItem
-                                    select = { false }
-                                    book = { book }
-                                    onAddedToCart={()=>{
-                                       return onAddedToCart(book.id)}
-                                    }
-                                />
-                            </li>)
-                        
-                })
-            }
-        </ListGroup>
-    )
-};
 
 class BookListContainer extends React.Component {
 
@@ -81,11 +15,47 @@ class BookListContainer extends React.Component {
         
     }
     
-    componentDidMount() {
-        this.props.fetchBooks();
+    componentDidMount() {        
+        if (this.props.books.length === 0) {
+            this.props.onRequested();
+            this.loadData();
+        }        
     }
 
+    fetchError = (errorMessage) => {
+        this.props.onError(errorMessage);
+      };
+    
+      fetchSuccess = (loadedData) => {
+        this.props.onLoaded(loadedData);
+      };
+
+    loadData = () => {
+        let sp = new URLSearchParams();
+        sp.append('f', 'READ');
+        sp.append('n', 'GLEB_ITEM_INFO');
+
+        return isoFetch("https://fe.it-academy.by/AjaxStringStorage2.php", {
+                method: 'post',
+                body: sp
+            })
+            .then( response => { // response - HTTP-ответ
+                if (!response.ok)
+                    throw new Error("fetch error " + response.status); // дальше по цепочке пойдёт отвергнутый промис
+                else
+                    return response.json(); // дальше по цепочке пойдёт промис с пришедшими по сети данными
+            })
+            .then( data => { 
+                data = JSON.parse(data.result).slice(0, 50);
+                this.fetchSuccess(data);
+            })
+            .catch( error => {
+                this.fetchError(error);
+            }); 
+      };
+
     render() {
+        
         const { books, loading, error, search, cartItems, onAddedToCart, pageNum } = this.props;
         
         if (loading) {
@@ -112,14 +82,21 @@ const mapStateToProps = (state, ownProps) => {
     return { books, loading, error, search, cartItems, pageNum };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { bookstoreService } = ownProps;
+const mapDispatchToProps = (dispatch) => {    
     return {
-        fetchBooks: fetchBooks(bookstoreService, dispatch),
+        onRequested: () => {
+            dispatch(booksRequested());
+        },
+        onLoaded: (data) => {
+            dispatch(booksLoaded(data));
+        },
+        onError: (err) => {
+            dispatch(booksError(err));
+        },
         onAddedToCart : (id) => {
             dispatch(bookAddedToCart(id));
         }
     }
 };
 
-export default withBookstoreService()(connect(mapStateToProps, mapDispatchToProps)(BookListContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(BookListContainer);

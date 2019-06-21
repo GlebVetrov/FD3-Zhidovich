@@ -17,8 +17,7 @@ ul li {
     margin-right: 20px;
 }
 
-.ActivePageLink {
-    color: black;
+.ActivePageLink {    
     font-weight: bold;
     text-decoration: underline;
 }

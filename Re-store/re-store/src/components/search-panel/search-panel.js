@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form, FormControl} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bookSearch } from '../../actions'
 
@@ -16,20 +16,17 @@ class SearchPanel extends React.Component {
     }
 
     search = () => { 
-        let str = this.inputRef.current.value;       
-        console.log(str);
+        let str = this.inputRef.current.value;
         this.inputRef.current.value = '';
         this.props.dispatch( bookSearch(str) );
     }
 
-    render() {
-        console.log(this.props);
+    render() {        
         return (
-            <div>
-                <input type='text' ref={this.inputRef}/>
-                <Button variant="dark" onClick={this.search}>Search</Button>
-                <hr></hr>
-            </div>
+            <Form inline> 
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" ref={this.inputRef}/>
+                    <Button variant="outline-primary" onClick={this.search}>Search</Button>
+            </Form>
         )
     }
 }

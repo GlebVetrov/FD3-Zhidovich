@@ -3,9 +3,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import App from '../components/app/';
+import App from '../components/app';
 
-test('работа MobileClients', () => {
+test('работа App', () => {
 
   // создаём тестовую версию компонента
   const component = renderer.create(
