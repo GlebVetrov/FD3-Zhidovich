@@ -1,7 +1,6 @@
 import React from 'react';
 import './shop-header.css';
 import { NavLink } from 'react-router-dom';
-import {} from 'react-bootstrap'
 
 const ShopHeader = ({ numItems, total }) => {
     return (

@@ -5,7 +5,6 @@ import ShopHeader from '../shop-header';
 import { connect } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
-
 import './app.css';
 
 const Container = ({ location }) => {
@@ -26,7 +25,7 @@ const Container = ({ location }) => {
 
 const AnimationRoute = withRouter(Container);
 
-const App = ({orderTotal, cartItems}) => {
+export const App = ({orderTotal, cartItems}) => {
     let num = 0;
     if (cartItems.length !== 0 ) {        
         num =   cartItems.reduce((sum, current) => {

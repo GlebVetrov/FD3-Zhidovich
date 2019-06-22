@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`работа ShopHeader 1`] = `
+<header
+  className="shop-header row"
+>
+  <a
+    aria-current="page"
+    className="active"
+    href="/"
+    onClick={[Function]}
+    style={Object {}}
+  >
+    <div
+      className="logo text-primary"
+      href="#"
+    >
+      BooksStore
+    </div>
+  </a>
+  <a
+    aria-current={null}
+    href="/cart"
+    onClick={[Function]}
+  >
+    <div>
+      <i
+        className="cart-icon fa fa-shopping-cart"
+      />
+      10
+       items ($
+      1000
+      )
+    </div>
+  </a>
+</header>
+`;
