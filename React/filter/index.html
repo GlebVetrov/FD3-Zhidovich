@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Фильтер</title>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+    <link rel="stylesheet" type="text/css" href="FilterBlock.css" />
+    <script src="FilterBlock.js"></script>    
+
+    <script>      
+    var text=[ 
+      {text:'бугалтерия',code:1}, 
+      {text:'математика',code:2}, 
+      {text:'физика',code:3} ,
+      {text:'биалогия',code:4} ,
+      {text:'русский язык',code:5} ,
+      {text:'история',code:6} ,
+      {text:'английский язык',code:7} ,
+      {text:'физкультура',code:8} ,
+    ];
+
+        ReactDOM.render(
+            React.createElement(FilterBlock, {text: text}),
+            document.getElementById('container')
+        );
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>InShop2</title>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+    <script src="InShop2Block.js"></script>
+    <link rel="stylesheet" type="text/css" href="InShop2Block.css" />
+
+    <script>
+
+        let productList =  [
+          {
+          code: 1,    
+          
+          name: 'product1',
+          prise: 30,
+          url: 'http://product1.com',
+          quantity: 20,
+        },
+
+        {
+          code: 2,  
+          
+          name: 'product2',
+          prise: 15,
+          url: 'http://product2.com',
+          quantity: 20,  
+        }
+        ,
+
+        {
+          code: 3,  
+          
+          name: 'product3',
+          prise: 45,
+          url: 'http://product3.com',
+          quantity: 120,  
+        }
+        ,
+
+        {
+          code: 4,  
+          
+          name: 'product4',
+          prise: 55,
+          url: 'http://product4.com',
+          quantity: 220,  
+        }
+        ,
+
+        { 
+          code: 5,  
+          
+          name: 'product5',
+          prise: 25,
+          url: 'http://product5.com',
+          quantity: 520,  
+        }
+      ];
+        
+        ReactDOM.render(
+            React.createElement(InShop2Block, {product: productList}),
+            document.getElementById('container')
+        );
+    </script>
+
+</body>
+
+</html>

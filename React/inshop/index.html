@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Голосование</title>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+    <script src="InShopBlock.js"></script>
+    <link rel="stylesheet" type="text/css" href="InShopBlock.css" />
+
+    <script>
+        
+        var goodsArr = [{
+                item: 'пальто',
+                code: 1,
+                count: 50,
+                photoURL: 'https://ucarecdn.com/eb00c82f-b5fa-4843-a7d5-996f292a11c9/',
+                cost: '50$',
+                color: 'beige',
+                text: 'Фото'
+            },
+            {
+                item: 'туфли',
+                code: 2,
+                count: 12,
+                photoURL: 'http://shoes2.takeshop.net/image/cache/intertop/load/ZM3801/MAIN-500x500.jpg',
+                cost: '50$',
+                color: 'black',
+                text: 'Фото'
+            },
+            {
+                item: 'избегаю',
+                code: 3,
+                count: 444,
+                photoURL: 'https://i1.rozetka.ua/goods/3206462/33539679_images_3206462447.png',
+                cost: '20$',
+                color: 'blue',
+                text: 'Фото'
+            }
+        ];
+
+        ReactDOM.render(
+            React.createElement(InShopBlock, {                
+                goods: goodsArr
+            }),
+            document.getElementById('container')
+        );
+    </script>
+
+</body>
+
+</html>
